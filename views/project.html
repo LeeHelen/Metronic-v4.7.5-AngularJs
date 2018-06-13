@@ -1,0 +1,62 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a ui-sref="dashboard">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a ui-sref="project">Projetc Management</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<p></p>
+<div class="row" ng-controller="ProjectController">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-dark">
+                    <i class="icon-settings font-dark"></i>
+                    <span class="caption-subject bold uppercase"> Projetc Management</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="btn-group">
+                                <button type="button" class="btn sbold green" ng-click="Create()"> Create
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn sbold blue" ng-click="Modify()"> Modify
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn sbold red" ng-click="Remove()"> Remove
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dataTables_wrapper no-footer">
+                    <div class="table-scrollable">
+                        <kendo-grid id="projectGrid" options="projectGridOptions">
+                        </kendo-grid>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- END MAIN CONTENT -->
+<!-- BEGIN MAIN JS-->
+<!-- <script type="text/javascript">
+</script> -->
+<!-- BEGIN MAIN JS -->
