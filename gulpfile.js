@@ -1,196 +1,184 @@
 'use strict';
 
-// sass compile
-var gulp = require('gulp'); //引入gulp
-var sass = require('gulp-sass'); //引入Sass v：4.0.1
+/**
+ * 程序入口:package.json的main
+ * 构建框架start
+*/
 
-//用于格式化（美化）HTML，JavaScript和CSS
-//已经过时，请用：gulp-html-beautify
-//.pipe(htmlbeautify({
-//{
-//  "indent_size": 4,  //
-//  "indent_char": " ",
-//  "eol": "\n",
-//  "indent_level": 0,
-//  "indent_with_tabs": false,
-//  "preserve_newlines": true,
-//  "max_preserve_newlines": 10,
-//  "jslint_happy": false,
-//  "space_after_anon_function": false,
-//  "brace_style": "collapse",
-//  "keep_array_indentation": false,
-//  "keep_function_indentation": false,
-//  "space_before_conditional": true,
-//  "break_chained_methods": false,
-//  "eval_code": false,
-//  "unescape_strings": false,
-//  "wrap_line_length": 0,
-//  "wrap_attributes": "auto",
-//  "wrap_attributes_indent_size": 4,
-//  "end_with_newline": false
-//}
-//}))
-var prettify = require('gulp-prettify');  
+/**
+ * 1.引入构建器gulp
+ */
+var gulp = require('gulp');
 
-//压缩css，已经过时，请使用gulp-clean-css v:3.9.4
-//.pipe(cleanCSS())
-var minifyCss = require("gulp-minify-css"); 
+/**
+ * 2.引入sass将sass打包成css
+ */
+var sass = require('gulp-sass');
 
-//重命名文件  v:1.3.0
-//.pipe(rename({
-//  dirname: "main/text/ciao",  //目录名
-//  basename: "aloha", //基础名称
-//  prefix: "bonjour-", //前缀
-//  suffix: "-hola", //后缀
-//  extname: ".md"  //扩展名
-//}))
-var rename = require("gulp-rename"); 
+/**
+ * 3.引入gulp-html-beautify格式化（美化）HTML，JavaScript和CSS
+ */
+var beautify = require('gulp-html-beautify');
 
-//压缩js v:0.1.5
-var uglify = require("gulp-uglify");
+/**
+ * 4.引入gulp-clean-css压缩css
+ */
+var cleanCss = require('gulp-clean-css');
 
-//格式化css插件  v：1.2.0
+/**
+ * 5.引入gulp-rename重命名JavaScript和CSS
+ */
+var rename = require('gulp-rename');
+
+/**
+ * 6.引入gulp-uglify压缩JavaScript
+ */
+var uglify = require('gulp-uglify');
+
+/**
+ * 7.引入gulp-rtlcss格式化CSS
+ */
 var rtlcss = require("gulp-rtlcss");
 
-//监控自动刷新 v：5.5.0
+/**
+ * 8.引入gulp-connect启动一个本地webServer服务器+监控自动刷新
+ */
 var connect = require('gulp-connect');
 
-//*** Localhost server tast
-gulp.task('localhost', function() {
-  connect.server();
+
+/**
+ * webServer服务启动
+ */
+//默认webServer
+gulp.task('defaultConnect', function () {
+    connect.server();
 });
-
-//默认不自动刷新页面
-//gulp.task('default',['localhost']);
-
-//监控并自动刷新
-gulp.task('localhost-live', function() {
-  connect.server({ //开启服务器建立端口号为3301的服务
-  	 port:8888,
-    livereload: true
-  }); 
+//开启自动刷新的webServer
+gulp.task('liveConnect', function () {
+    connect.server({
+        name: 'Project Tracking System',
+        port: 8888,
+        livereload: true  //自动刷新     
+    });
 });
-
-//即时刷新浏览器
-gulp.task("refuseBrower",function(){
-    gulp.src(['./index.html','./tpl/*.html','./view/*.html','./js/*.js'])
-    .pipe(connect.reload())
+//定义需要刷新的资源
+gulp.task('liveAssets', function () {
+    gulp.src(['./index.html', './tpl/*.html', './views/**/*.html', './js/**/*.js']) //资源位置
+        .pipe(connect.reload());  //刷新操作
+});
+//监听变化的资源并执行实时刷新
+gulp.task("connect:watch", function () {
+    //gulp.watch(glob[, opts], tasks)
+    //glob 为要监视的文件匹配模式，规则和用法与gulp.src()方法中的glob相同。 
+    //opts 为一个可选的配置对象，通常不需要用到 
+    //tasks 为文件变化后要执行的任务，为一个数组
+    gulp.watch(['./index.html', './tpl/*.html', './views/**/*.html', './js/**/*.js'], ['liveAssets'])
 })
+//默认启动服务
+gulp.task('default', ['liveConnect', 'connect:watch', 'sass:watch']);
 
-//监听文件的内容变换
-gulp.task("watch",function(){
-    gulp.watch(['./index.html','./tpl/*.html','./view/*.html','./js/*.js'],['refuseBrower'])
-}) 
-
-//默认自动刷新页面
-gulp.task('default',['localhost-live','watch']);
-
-//*** SASS compiler task
+/**
+ * 处理sass
+ */
 gulp.task('sass', function () {
-  // bootstrap compilation
-	gulp.src('./sass/bootstrap.scss').pipe(sass()).pipe(gulp.dest('./assets/global/plugins/bootstrap/css/'));
-
-  // select2 compilation using bootstrap variables
-	gulp.src('./assets/global/plugins/select2/sass/select2-bootstrap.min.scss').pipe(sass({outputStyle: 'compressed'})).pipe(gulp.dest('./assets/global/plugins/select2/css/'));
-
-  // global theme stylesheet compilation
-	gulp.src('./sass/global/*.scss').pipe(sass()).pipe(gulp.dest('./assets/global/css'));
-	gulp.src('./sass/apps/*.scss').pipe(sass()).pipe(gulp.dest('./assets/apps/css'));
-	gulp.src('./sass/pages/*.scss').pipe(sass()).pipe(gulp.dest('./assets/pages/css'));
-
-  // theme layouts compilation
-	gulp.src('./sass/layouts/layout/*.scss').pipe(sass()).pipe(gulp.dest('./assets/layouts/layout/css'));
-  gulp.src('./sass/layouts/layout/themes/*.scss').pipe(sass()).pipe(gulp.dest('./assets/layouts/layout/css/themes'));
-
-  gulp.src('./sass/layouts/layout2/*.scss').pipe(sass()).pipe(gulp.dest('./assets/layouts/layout2/css'));
-  gulp.src('./sass/layouts/layout2/themes/*.scss').pipe(sass()).pipe(gulp.dest('./assets/layouts/layout2/css/themes'));
-
-  gulp.src('./sass/layouts/layout3/*.scss').pipe(sass()).pipe(gulp.dest('./assets/layouts/layout3/css'));
-  gulp.src('./sass/layouts/layout3/themes/*.scss').pipe(sass()).pipe(gulp.dest('./assets/layouts/layout3/css/themes'));
-
-  gulp.src('./sass/layouts/layout4/*.scss').pipe(sass()).pipe(gulp.dest('./assets/layouts/layout4/css'));
-  gulp.src('./sass/layouts/layout4/themes/*.scss').pipe(sass()).pipe(gulp.dest('./assets/layouts/layout4/css/themes'));
-
-  gulp.src('./sass/layouts/layout5/*.scss').pipe(sass()).pipe(gulp.dest('./assets/layouts/layout5/css'));
-
-  gulp.src('./sass/layouts/layout6/*.scss').pipe(sass()).pipe(gulp.dest('./assets/layouts/layout6/css'));
-
-  gulp.src('./sass/layouts/layout7/*.scss').pipe(sass()).pipe(gulp.dest('./assets/layouts/layout7/css'));
+    // bootstrap compilation
+    gulp.src('./sass/bootstrap.scss') //路径
+        .pipe(sass()) //编译
+        .pipe(gulp.dest('./assets/global/plugins/bootstrap/css/')); //输出
+    // select2 compilation using bootstrap variables
+    gulp.src('./assets/global/plugins/select2/sass/select2-bootstrap.min.scss').pipe(sass({ outputStyle: 'compressed' })).pipe(gulp.dest('./assets/global/plugins/select2/css/'));
+    // global theme stylesheet compilation
+    gulp.src('./sass/global/*.scss').pipe(sass()).pipe(gulp.dest('./assets/global/css'));
+    gulp.src('./sass/apps/*.scss').pipe(sass()).pipe(gulp.dest('./assets/apps/css'));
+    gulp.src('./sass/pages/*.scss').pipe(sass()).pipe(gulp.dest('./assets/pages/css'));
+    // theme layouts compilation
+    gulp.src('./sass/layouts/layout/*.scss').pipe(sass()).pipe(gulp.dest('./assets/layouts/layout/css'));
+    gulp.src('./sass/layouts/layout/themes/*.scss').pipe(sass()).pipe(gulp.dest('./assets/layouts/layout/css/themes'));
 });
-
-//*** SASS watch(realtime) compiler task
+/**
+ * 监听sass实时刷新
+ */
 gulp.task('sass:watch', function () {
-	gulp.watch('./sass/**/*.scss', ['sass']);
+    gulp.watch('./sass/**/*.scss', ['sass']);
 });
 
-//*** CSS & JS minify task
-gulp.task('minify', function () {
-    // css minify 
-    gulp.src(['./assets/apps/css/*.css', '!./assets/apps/css/*.min.css']).pipe(minifyCss()).pipe(rename({suffix: '.min'})).pipe(gulp.dest('./assets/apps/css/'));
-
-    gulp.src(['./assets/global/css/*.css','!./assets/global/css/*.min.css']).pipe(minifyCss()).pipe(rename({suffix: '.min'})).pipe(gulp.dest('./assets/global/css/'));
-    gulp.src(['./assets/pages/css/*.css','!./assets/pages/css/*.min.css']).pipe(minifyCss()).pipe(rename({suffix: '.min'})).pipe(gulp.dest('./assets/pages/css/'));    
-    
-    gulp.src(['./assets/layouts/**/css/*.css','!./assets/layouts/**/css/*.min.css']).pipe(rename({suffix: '.min'})).pipe(minifyCss()).pipe(gulp.dest('./assets/layouts/'));
-    gulp.src(['./assets/layouts/**/css/**/*.css','!./assets/layouts/**/css/**/*.min.css']).pipe(rename({suffix: '.min'})).pipe(minifyCss()).pipe(gulp.dest('./assets/layouts/'));
-
-    gulp.src(['./assets/global/plugins/bootstrap/css/*.css','!./assets/global/plugins/bootstrap/css/*.min.css']).pipe(minifyCss()).pipe(rename({suffix: '.min'})).pipe(gulp.dest('./assets/global/plugins/bootstrap/css/'));
-
-    //js minify
-    gulp.src(['./assets/apps/scripts/*.js','!./assets/apps/scripts/*.min.js']).pipe(uglify()).pipe(rename({suffix: '.min'})).pipe(gulp.dest('./assets/apps/scripts/'));
-    gulp.src(['./assets/global/scripts/*.js','!./assets/global/scripts/*.min.js']).pipe(uglify()).pipe(rename({suffix: '.min'})).pipe(gulp.dest('./assets/global/scripts'));
-    gulp.src(['./assets/pages/scripts/*.js','!./assets/pages/scripts/*.min.js']).pipe(uglify()).pipe(rename({suffix: '.min'})).pipe(gulp.dest('./assets/pages/scripts'));
-    gulp.src(['./assets/layouts/**/scripts/*.js','!./assets/layouts/**/scripts/*.min.js']).pipe(uglify()).pipe(rename({suffix: '.min'})).pipe(gulp.dest('./assets/layouts/'));
-});
-
-//*** RTL convertor task
-gulp.task('rtlcss', function () {
-
-  gulp
-    .src(['./assets/apps/css/*.css', '!./assets/apps/css/*-rtl.min.css', '!./assets/apps/css/*-rtl.css', '!./assets/apps/css/*.min.css'])
+/**
+ * 格式化css
+ */
+gulp.task('rtlcss',function() {
+    gulp.src(['./assets/apps/css/*.css', '!./assets/apps/css/*-rtl.min.css', '!./assets/apps/css/*-rtl.css', '!./assets/apps/css/*.min.css'])
     .pipe(rtlcss())
     .pipe(rename({suffix: '-rtl'}))
     .pipe(gulp.dest('./assets/apps/css'));
 
-  gulp
-    .src(['./assets/pages/css/*.css', '!./assets/pages/css/*-rtl.min.css', '!./assets/pages/css/*-rtl.css', '!./assets/pages/css/*.min.css'])
+  gulp.src(['./assets/pages/css/*.css', '!./assets/pages/css/*-rtl.min.css', '!./assets/pages/css/*-rtl.css', '!./assets/pages/css/*.min.css'])
     .pipe(rtlcss())
     .pipe(rename({suffix: '-rtl'}))
     .pipe(gulp.dest('./assets/pages/css'));
 
-  gulp
-    .src(['./assets/global/css/*.css', '!./assets/global/css/*-rtl.min.css', '!./assets/global/css/*-rtl.css', '!./assets/global/css/*.min.css'])
+  gulp.src(['./assets/global/css/*.css', '!./assets/global/css/*-rtl.min.css', '!./assets/global/css/*-rtl.css', '!./assets/global/css/*.min.css'])
     .pipe(rtlcss())
     .pipe(rename({suffix: '-rtl'}))
     .pipe(gulp.dest('./assets/global/css'));
 
-  gulp
-    .src(['./assets/layouts/**/css/*.css', '!./assets/layouts/**/css/*-rtl.css', '!./assets/layouts/**/css/*-rtl.min.css', '!./assets/layouts/**/css/*.min.css'])
+  gulp.src(['./assets/layouts/**/css/*.css', '!./assets/layouts/**/css/*-rtl.css', '!./assets/layouts/**/css/*-rtl.min.css', '!./assets/layouts/**/css/*.min.css'])
     .pipe(rtlcss())
     .pipe(rename({suffix: '-rtl'}))
     .pipe(gulp.dest('./assets/layouts'));
 
-  gulp
-    .src(['./assets/layouts/**/css/**/*.css', '!./assets/layouts/**/css/**/*-rtl.css', '!./assets/layouts/**/css/**/*-rtl.min.css', '!./assets/layouts/**/css/**/*.min.css'])
+  gulp.src(['./assets/layouts/**/css/**/*.css', '!./assets/layouts/**/css/**/*-rtl.css', '!./assets/layouts/**/css/**/*-rtl.min.css', '!./assets/layouts/**/css/**/*.min.css'])
     .pipe(rtlcss())
     .pipe(rename({suffix: '-rtl'}))
     .pipe(gulp.dest('./assets/layouts'));
 
-  gulp
-    .src(['./assets/global/plugins/bootstrap/css/*.css', '!./assets/global/plugins/bootstrap/css/*-rtl.css', '!./assets/global/plugins/bootstrap/css/*.min.css'])
+  gulp.src(['./assets/global/plugins/bootstrap/css/*.css', '!./assets/global/plugins/bootstrap/css/*-rtl.css', '!./assets/global/plugins/bootstrap/css/*.min.css'])
     .pipe(rtlcss())
     .pipe(rename({suffix: '-rtl'}))
     .pipe(gulp.dest('./assets/global/plugins/bootstrap/css')); 
 });
 
-//*** HTML formatter task
-gulp.task('prettify', function() {
-  	
-  	gulp.src('./**/*.html').
-  	  	pipe(prettify({
-    		indent_size: 4, 
-    		indent_inner_html: true,
-    		unformatted: ['pre', 'code']
-   		})).
-   		pipe(gulp.dest('./'));
+/**
+ * 压缩JavaScript和CSS
+ */
+gulp.task('minify', function () {
+    // css minify 
+    gulp.src(['./assets/apps/css/*.css', '!./assets/apps/css/*.min.css']) //资源路径
+    .pipe(cleanCss())  //压缩css
+    .pipe(rename({ suffix: '.min' })) //更名(加min后缀)
+    .pipe(gulp.dest('./assets/apps/css/')); //输出
+
+    gulp.src(['./assets/global/css/*.css', '!./assets/global/css/*.min.css']).pipe(cleanCss()).pipe(rename({ suffix: '.min' })).pipe(gulp.dest('./assets/global/css/'));
+    gulp.src(['./assets/pages/css/*.css', '!./assets/pages/css/*.min.css']).pipe(cleanCss()).pipe(rename({ suffix: '.min' })).pipe(gulp.dest('./assets/pages/css/'));
+
+    gulp.src(['./assets/layouts/**/css/*.css', '!./assets/layouts/**/css/*.min.css']).pipe(rename({ suffix: '.min' })).pipe(cleanCss()).pipe(gulp.dest('./assets/layouts/'));
+    gulp.src(['./assets/layouts/**/css/**/*.css', '!./assets/layouts/**/css/**/*.min.css']).pipe(rename({ suffix: '.min' })).pipe(cleanCss()).pipe(gulp.dest('./assets/layouts/'));
+
+    gulp.src(['./assets/global/plugins/bootstrap/css/*.css', '!./assets/global/plugins/bootstrap/css/*.min.css']).pipe(cleanCss()).pipe(rename({ suffix: '.min' })).pipe(gulp.dest('./assets/global/plugins/bootstrap/css/'));
+
+    //js minify
+    gulp.src(['./assets/apps/scripts/*.js', '!./assets/apps/scripts/*.min.js']).pipe(uglify()).pipe(rename({ suffix: '.min' })).pipe(gulp.dest('./assets/apps/scripts/'));
+    gulp.src(['./assets/global/scripts/*.js', '!./assets/global/scripts/*.min.js']).pipe(uglify()).pipe(rename({ suffix: '.min' })).pipe(gulp.dest('./assets/global/scripts'));
+    gulp.src(['./assets/pages/scripts/*.js', '!./assets/pages/scripts/*.min.js']).pipe(uglify()).pipe(rename({ suffix: '.min' })).pipe(gulp.dest('./assets/pages/scripts'));
+    gulp.src(['./assets/layouts/**/scripts/*.js', '!./assets/layouts/**/scripts/*.min.js']).pipe(uglify()).pipe(rename({ suffix: '.min' })).pipe(gulp.dest('./assets/layouts/'));
 });
+
+/**
+ * 格式化（美化）HTML，JavaScript和CSS
+ */
+// gulp.task('beautify',function() {
+//     gulp.src(['./assets/**/**/css/*.css', '!./assets/**/**/css/*-rtl.css', '!./assets/**/**/css/*-rtl.min.css', '!./assets/**/**/css/*.min.css'])
+//     .pipe(beautify({
+//         "indent_size": 4,
+//         "indent_char": " ",
+//         "eol": "\n"
+//     }))
+//     .pipe(gulp.dest('./'));
+// });
+
+/**
+ * 启动步骤：
+ * 1.打包sass为css:gulp sass
+ * 2.格式化css:gulp rtlcss
+ * 3.压缩JavaScript和CSS:gulp minify
+ * 4.启动服务:gulp default
+ */
