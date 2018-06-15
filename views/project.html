@@ -14,45 +14,153 @@
 <!-- BEGIN MAIN CONTENT -->
 <p></p>
 <div class="row" ng-controller="ProjectController">
-    <div class="col-md-12">
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption font-dark">
-                    <i class="icon-settings font-dark"></i>
-                    <span class="caption-subject bold uppercase"> Projetc Management</span>
-                </div>
-            </div>
-            <div class="portlet-body">
-                <div class="table-toolbar">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="btn-group">
-                                <button type="button" class="btn sbold green" ng-click="Create()"> Create
-                                    <i class="fa fa-plus"></i>
-                                </button>
-                            </div>
-                            <div class="btn-group">
-                                <button type="button" class="btn sbold blue" ng-click="Modify()"> Modify
-                                    <i class="fa fa-edit"></i>
-                                </button>
-                            </div>
-                            <div class="btn-group">
-                                <button type="button" class="btn sbold red" ng-click="Remove()"> Remove
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="dataTables_wrapper no-footer">
-                    <div class="table-scrollable">
-                        <kendo-grid id="projectGrid" options="projectGridOptions">
-                        </kendo-grid>
-                    </div>
-                </div>
+    <div class="col-md-8">
+        <div class="btn-group">
+            <button type="button" class="btn sbold green" ng-click="Create()"> Create
+                <i class="fa fa-plus"></i>
+            </button>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn sbold blue" ng-click="Modify()"> Modify
+                <i class="fa fa-edit"></i>
+            </button>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn sbold red" ng-click="Remove()"> Remove
+                <i class="fa fa-trash"></i>
+            </button>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="pull-right">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Input Keywords" ng-model="model.requestPara.KeyWords">
+                <span class="input-group-btn">
+                    <button class="btn" type="button" ng-click="Search()">
+                        <i class="fa fa-search"></i>
+                        Search
+                    </button>
+                </span>
             </div>
         </div>
     </div>
+    <div class="col-md-12">
+        <div class="portlet light bordered" style="border:0!important;padding: 0;margin-bottom:0;">
+            <div class="portlet-title" style="min-height: 20px;margin-bottom:10px;">
+                <div class="caption">
+                    <i class="icon-settings"></i>
+                    <span class="caption-subject">advanced search</span>
+                </div>
+                <div class="tools" style="padding: 5px 0 0 0;">
+                    <a href="" class="expand" data-original-title="" title="collapse/expand advanced search"> </a>
+                </div>
+            </div>
+            <div class="portlet-body form" style="display: none;">
+                <form action="#" class="form-horizontal">
+                    <div class="row">
+                        <!--/span-->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">status</label>
+                                <div class="col-md-9">
+                                    <select name="status" class="form-control input-medium" ng-model="model.requestPara.Status">
+                                        <option value=""></option>
+                                        <option value="0_Launched">0_Launched</option>
+                                        <option value="2_ReleasedSent">2_ReleasedSent</option>
+                                        <option value="4_Coding">4_Coding</option>
+                                        <option value="6_WatingStart">6_WatingStart</option>
+                                        <option value="7_Hold">7_Hold</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/span-->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">version</label>
+                                <div class="col-md-9">
+                                    <input name="version" type="text" class="form-control input-medium" placeholder="version" ng-model="model.requestPara.Version">
+                                </div>
+                            </div>
+                        </div>
+                        <!--/span-->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">jira</label>
+                                <div class="col-md-9">
+                                    <input name="jira" type="text" class="form-control input-medium" placeholder="jira" ng-model="model.requestPara.Jira">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!--/span-->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">startDate</label>
+                                <div class="col-md-9">
+                                    <div class="input-group input-medium date-picker input-daterange">
+                                        <input id="StartDate" type="text" class="form-control" name="from">
+                                        <span class="input-group-addon"> to </span>
+                                        <input id="EndDate" type="text" class="form-control" name="to"> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/span-->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">testData</label>
+                                <div class="col-md-9">
+                                    <div class="input-group input-medium date-picker input-daterange">
+                                        <input id="StartTestDate" type="text" class="form-control" name="from">
+                                        <span class="input-group-addon"> to </span>
+                                        <input id="EndTestDate" type="text" class="form-control" name="to"> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/span-->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">releaseDate</label>
+                                <div class="col-md-9">
+                                    <div class="input-group input-medium date-picker input-daterange">
+                                        <input id="StartReleaseDate" type="text" class="form-control" name="from">
+                                        <span class="input-group-addon"> to </span>
+                                        <input id="EndReleaseDate" type="text" class="form-control" name="to"> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!--/span-->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">launchDate</label>
+                                <div class="col-md-9">
+                                    <div class="input-group input-medium date-picker input-daterange">
+                                        <input id="StartLaunchDate" type="text" class="form-control" name="from">
+                                        <span class="input-group-addon"> to </span>
+                                        <input id="EndLaunchDate" type="text" class="form-control" name="to"> </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="dataTables_wrapper no-footer">
+            <div class="table-scrollable">
+                <kendo-grid id="projectGrid" options="projectGridOptions">
+                </kendo-grid>
+                <!-- <script type="text/x-kendo-template" id="toolbarTemplate">
+                                toolbar
+                            </script> -->
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <!-- END MAIN CONTENT -->
