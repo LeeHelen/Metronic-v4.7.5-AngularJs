@@ -1,5 +1,5 @@
 /* Setup blank page controller */
-angular.module('App').controller('BlankController', ['$rootScope', '$scope', 'settings', function($rootScope, $scope, settings) {
+angular.module('App').controller('ProjectAddController', ['$rootScope', '$scope', 'settings', function($rootScope, $scope, settings) {
     $scope.$on('$viewContentLoaded', function() {   
         // initialize core components
         App.initAjax();

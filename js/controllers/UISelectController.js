@@ -4,7 +4,7 @@
  * performs a AND between 'name: $select.search' and 'age: $select.search'.
  * We want to perform a OR.
  */
-angular.module('MetronicApp').filter('propsFilter', function() {
+angular.module('App').filter('propsFilter', function() {
     return function(items, props) {
         var out = [];
 
@@ -36,7 +36,7 @@ angular.module('MetronicApp').filter('propsFilter', function() {
     };
 });
 
-angular.module('MetronicApp').controller('UISelectController', function($scope, $http, $timeout, $interval) {
+angular.module('App').controller('UISelectController', function($scope, $http, $timeout, $interval) {
     $scope.$on('$viewContentLoaded', function() {
         //App.initAjax(); // initialize core components
     });

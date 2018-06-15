@@ -1,4 +1,4 @@
-angular.module('MetronicApp').controller('UserProfileController', function($rootScope, $scope, $http, $timeout, $state) {
+angular.module('App').controller('UserProfileController', function($rootScope, $scope, $http, $timeout, $state) {
     $scope.$on('$viewContentLoaded', function() {   
         App.initAjax(); // initialize core components
         Layout.setAngularJsSidebarMenuActiveLink('set', $('#sidebar_menu_link_profile'), $state); // set profile link active in sidebar menu 

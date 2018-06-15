@@ -1,4 +1,4 @@
-angular.module('MetronicApp').controller('TodoController', function($rootScope, $scope, $http, $timeout) {
+angular.module('App').controller('TodoController', function($rootScope, $scope, $http, $timeout) {
     $scope.$on('$viewContentLoaded', function() {   
         App.initAjax(); // initialize core components        
     });
