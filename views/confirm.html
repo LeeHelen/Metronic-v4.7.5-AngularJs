@@ -1,0 +1,211 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Add</h3>
+</div>
+<div class="modal-body" id="modal-body" style="height:550px;overflow-y: auto;">
+    <form action="javascript:;" id="form_project_add" class="form-horizontal" novalidate="novalidate" ng-init="initForm()">
+        <div class="form-body">
+            <div class="alert alert-danger display-hide">
+                <button class="close" data-close="alert"></button> You have some form errors. Please check below. </div>
+            <div class="alert alert-success display-hide">
+                <button class="close" data-close="alert"></button> Your form validation is successful! </div>
+
+            <div class="form-group  margin-top-10">
+                <label class="control-label col-md-3">Version
+                    <span class="required" aria-required="true"> * </span>
+                </label>
+                <div class="col-md-8">
+                    <div class="input-icon right">
+                        <i class="fa"></i>
+                        <input type="text" class="form-control" name="Version" ng-model="model.entity.Version"> </div>
+                </div>
+            </div>
+
+            <div class="form-group  margin-top-10">
+                <label class="control-label col-md-3">Status
+                    <span class="required" aria-required="true"> * </span>
+                </label>
+                <div class="col-md-8">
+                    <div class="input-icon right">
+                        <i class="fa"></i>
+                        <select class="form-control" name="Status" ng-model="model.entity.Status">
+                            <option value=""></option>
+                            <option value="0_Launched">0_Launched</option>
+                            <option value="2_Released">2_Released</option>
+                            <option value="4_Coding">4_Coding</option>
+                            <option value="6_WatingStart">6_WatingStart</option>
+                            <option value="7_Hold">7_Hold</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-3">Jira
+                    <span class="required" aria-required="true"> * </span>
+                </label>
+                <div class="col-md-8">
+                    <div class="input-icon right">
+                        <i class="fa"></i>
+                        <input type="text" class="form-control" name="Jira" ng-model="model.entity.Jira"> </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-3">ProjectDescription
+                </label>
+                <div class="col-md-8">
+                    <div class="input-icon right">
+                        <i class="fa"></i>
+                        <textarea class="form-control" name="ProjectDescription" ng-model="model.entity.ProjectDescription" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-3">BSD
+                </label>
+                <div class="col-md-8">
+                    <div class="input-icon right">
+                        <i class="fa"></i>
+                        <input type="text" class="form-control" name="BSD" ng-model="model.entity.BSD"> </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-3">LocalPM
+                </label>
+                <div class="col-md-8">
+                    <div class="input-icon right">
+                        <i class="fa"></i>
+                        <input type="text" class="form-control" name="LocalPM" ng-model="model.entity.LocalPM"> </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-3">Developer
+                </label>
+                <div class="col-md-8">
+                    <div class="input-icon right">
+                        <i class="fa"></i>
+                        <input type="text" class="form-control" name="Developer" ng-model="model.entity.Developer"> </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-3">Tester
+                </label>
+                <div class="col-md-8">
+                    <div class="input-icon right">
+                        <i class="fa"></i>
+                        <input type="text" class="form-control" name="Tester" ng-model="model.entity.Tester"> </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-3">StartDate
+                </label>
+                <div class="col-md-8">
+                    <div class="input-icon right">
+                        <i class="fa"></i>
+                        <div class="input-group input-medium date date-picker">
+                            <input type="text" class="form-control" readonly name="StartDate" ng-model="model.entity.StartDate">
+                            <span class="input-group-btn">
+                                <button class="btn default" type="button">
+                                    <i class="fa fa-calendar"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-3">TestDate
+                </label>
+                <div class="col-md-8">
+                    <div class="input-icon right">
+                        <i class="fa"></i>
+                        <div class="input-group input-medium date date-picker">
+                            <input type="text" class="form-control" readonly name="TestDate" ng-model="model.entity.TestDate">
+                            <span class="input-group-btn">
+                                <button class="btn default" type="button">
+                                    <i class="fa fa-calendar"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-3">ReleaseDate
+                </label>
+                <div class="col-md-8">
+                    <div class="input-icon right">
+                        <i class="fa"></i>
+                        <div class="input-group input-medium date date-picker">
+                            <input type="text" class="form-control" readonly name="ReleaseDate" ng-model="model.entity.ReleaseDate">
+                            <span class="input-group-btn">
+                                <button class="btn default" type="button">
+                                    <i class="fa fa-calendar"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-3">LaunchDate
+                </label>
+                <div class="col-md-8">
+                    <div class="input-icon right">
+                        <i class="fa"></i>
+                        <div class="input-group input-medium date date-picker">
+                            <input type="text" class="form-control" readonly name="LaunchDate" ng-model="model.entity.LaunchDate">
+                            <span class="input-group-btn">
+                                <button class="btn default" type="button">
+                                    <i class="fa fa-calendar"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-3">Memo
+                </label>
+                <div class="col-md-8">
+                    <div class="input-icon right">
+                        <i class="fa"></i>
+                        <textarea class="form-control" name="Memo" ng-model="model.entity.Memo" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- <div class="form-actions">
+            <div class="row">
+                <div class="col-md-offset-3 col-md-9">
+                    <button type="submit" class="btn green">Submit</button>
+                    <button type="button" class="btn default">Cancel</button>
+                </div>
+            </div>
+        </div> -->
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+</div>
+
+<script>
+    //initialize datepicker
+    $('.date-picker').datepicker({
+        format: 'dd/mm/yyyy',
+        autoclose: true,
+        clearBtn: true,
+        todayBtn: 'linked'
+    });
+</script>
