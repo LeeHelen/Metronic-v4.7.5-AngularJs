@@ -154,6 +154,28 @@ App.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
                 }]
             }
         })
+        
+        //Project Operation Page
+        .state('ProjectAdd',{
+            url:"/projectAdd",
+            templateUrl: "views/projectAdd.html",  
+            data: {pageTitle: 'Project Operation'},
+            controller: "ProjectAddController",
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name: 'App',
+                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
+                        files: [
+                            '../assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css',
+                            '../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js',
+                            '../assets/global/plugins/jquery-validation/js/jquery.validate.min.js',
+                            'js/controllers/ProjectAddController.js'
+                        ] 
+                    });
+                }]
+            }
+        })
 
         //Project Page
         .state('project',{
@@ -175,34 +197,14 @@ App.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
                             '../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js',
                             '../assets/global/plugins/bootbox/bootbox.min.js',
                             '../assets/global/plugins/angularjs/plugins/ui-bootstrap-tpls.min.js',
-                            'js/controllers/ProjectController.js',
-                            'js/controllers/ProjectAddController.js'
-                        ] 
-                    });
-                }]
-            }
-        })
-        
-        //Project Operation Page
-        .state('ProjectAdd',{
-            url:"/projectAdd",
-            templateUrl: "views/projectAdd.html",  
-            data: {pageTitle: 'Project Operation'},
-            controller: "ProjectAddController",
-            resolve: {
-                deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load({
-                        name: 'App',
-                        insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
-                        files: [
                             '../assets/global/plugins/jquery-validation/js/jquery.validate.min.js',
-                            'js/controllers/ProjectAddController.js'
+                            // 'js/controllers/ProjectAddController.js',
+                            'js/controllers/ProjectController.js'
                         ] 
                     });
                 }]
             }
         });
-        
         
 
 }]);
