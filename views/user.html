@@ -1,0 +1,144 @@
+<!-- BEGIN PAGE HEADER-->
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <a ui-sref="dashboard">Home</a>
+            <i class="fa fa-circle"></i>
+        </li>
+        <li>
+            <a ui-sref="user">User Management</a>
+        </li>
+    </ul>
+    
+    <!--去掉导航栏右侧按钮（注：每个详情页面都有）-->
+    <!--<div class="page-toolbar">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" dropdown-menu-hover data-delay="1000" data-close-others="true"> Actions
+                <i class="fa fa-angle-down"></i>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                    <a href="#">
+                        <i class="icon-user"></i> New User </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-present"></i> New Event
+                        <span class="badge badge-success">4</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-basket"></i> New order </a>
+                </li>
+                <li class="divider"> </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-flag"></i> Pending Orders
+                        <span class="badge badge-danger">4</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="icon-users"></i> Pending Users
+                        <span class="badge badge-warning">12</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+	-->
+
+</div>
+<h3 class="page-title"> Blank Page
+    <small>blank page template</small>
+</h3>
+<!-- END PAGE HEADER-->
+<!-- BEGIN MAIN CONTENT -->
+<div class="row" ng-controller="BlankController">
+    <div class="col-md-12">
+        <!-- BEGIN: ACCORDION DEMO -->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-green-sharp">
+                    <i class="icon-settings font-green-sharp"></i>
+                    <span class="caption-subject bold uppercase">Page Portlet</span>
+                    <span class="caption-helper hide"></span>
+                </div>
+                <div class="actions">
+                    <a class="btn btn-circle btn-icon-only btn-default" href="#">
+                        <i class="icon-cloud-upload"></i>
+                    </a>
+                    <a class="btn btn-circle btn-icon-only btn-default" href="#">
+                        <i class="icon-wrench"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body"> Blank page content goes here... 
+                    <form action="#" class="mt-repeater form-horizontal">
+                    <div data-repeater-item="" class="mt-repeater-item">
+                            <!-- jQuery Repeater Container -->
+                            <div class="mt-repeater-input">
+                                <label class="control-label">Name</label>
+                                <br>
+                                <input type="text" name="group-a[0][text-input]" class="form-control" value="John Smith"> </div>
+                            <div class="mt-repeater-input">
+                                <label class="control-label">Joined Date</label>
+                                <br>
+                                <input class="input-group form-control form-control-inline date date-picker" size="16" type="text" value="01/08/2016" name="group-a[0][date-input]" data-date-format="dd/mm/yyyy"> </div>
+                            <div class="mt-repeater-input mt-repeater-textarea">
+                                <label class="control-label">Job Description</label>
+                                <br>
+                                <textarea name="group-a[0][textarea-input]" class="form-control" rows="3">This role is to follow up with all meetings and ensure that each operational process flow moves accordingly in a timely manner.</textarea>
+                            </div>
+                            <div class="mt-repeater-input mt-radio-inline">
+                                <label class="control-label">Tier</label>
+                                <br>
+                                <label class="mt-radio">
+                                    <input type="radio" name="group-a[0][optionsRadios]" id="optionsRadios25" value="junior"> Junior
+                                    <span></span>
+                                </label>
+                                <label class="mt-radio">
+                                    <input type="radio" name="group-a[0][optionsRadios]" id="optionsRadios26" value="senior"> Senior
+                                    <span></span>
+                                </label>
+                            </div>
+                            <div class="mt-repeater-input mt-checkbox-inline">
+                                <label class="control-label">Language</label>
+                                <br>
+                                <label class="mt-checkbox">
+                                    <input type="checkbox" id="inlineCheckbox21" value="option1"> English
+                                    <span></span>
+                                </label>
+                                <label class="mt-checkbox">
+                                    <input type="checkbox" id="inlineCheckbox22" value="option2"> French
+                                    <span></span>
+                                </label>
+                            </div>
+                            <div class="mt-repeater-input">
+                                <label class="control-label">Department</label>
+                                <br>
+                                <select name="group-a[0][select-input]" class="form-control">
+                                    <option value="A" selected="">Marketing</option>
+                                    <option value="B">Creative</option>
+                                    <option value="C">Development</option>
+                                </select>
+                            </div>
+                            <div class="mt-repeater-input">
+                                <a href="javascript:;" data-repeater-delete="" class="btn btn-danger mt-repeater-delete">
+                                    <i class="fa fa-close"></i> Delete</a>
+                            </div>
+                        </div>
+                
+            
+                    
+                </form>    </div>
+        </div>
+    </div>
+</div>
+<!-- END MAIN CONTENT -->
+<!-- BEGIN MAIN JS-->
+<script>
+    // call any jquery or angularjs code ehre
+</script>
+<!-- BEGIN MAIN JS -->

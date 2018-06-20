@@ -1,7 +1,7 @@
 <div class="modal-header">
     <h3 class="modal-title" id="modal-title">Add</h3>
 </div>
-<div class="modal-body" id="modal-body" style="height:550px;overflow-y: auto;">
+<div class="modal-body" id="modal-body" style="height:550px;overflow-y: auto;overflow-x: hidden;">
     <form action="javascript:;" id="form_project_add" class="form-horizontal" novalidate="novalidate" ng-init="initForm()">
         <div class="form-body">
             <div class="alert alert-danger display-hide">
@@ -196,8 +196,12 @@
     </form>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-default" type="button" ng-click="$ctrl.cancel()">Cancel</button>
-    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+    <button class="btn btn-default" type="button" ng-click="$ctrl.cancel()">
+        <i class="fa fa-close"></i> Cancel
+    </button>
+    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">
+        <i class="fa fa-save"></i> Save
+    </button>
 </div>
 
 <script>
