@@ -1,6 +1,6 @@
 /* Setup blank page controller */
-angular.module('App', ['ui.bootstrap'])
-.controller('ProjectAddController', ['$rootScope', '$scope', 'settings', '$element', '$uibModalInstance', function($rootScope, $scope, settings, $element, $uibModalInstance) {
+angular.module('App', [])
+.controller('ProjectAddController', ['$rootScope', '$scope', 'settings', '$element', function($rootScope, $scope, settings, $element) {
     // $scope.$on('$viewContentLoaded', function() {   
     //     // initialize core components
     //     App.initAjax();
@@ -12,20 +12,20 @@ angular.module('App', ['ui.bootstrap'])
 
     // });
 
-    var $ctrl = this;
-    $scope.modalDatas = modalDatas; //双向绑定，方便在确认中回传可能修改的字段
+    // var $ctrl = this;
+    // $scope.modalDatas = modalDatas; //双向绑定，方便在确认中回传可能修改的字段
    
-    // $ctrl.insta
-    $ctrl.ok = function (val) {
-      $scope.modalDatas.result = val;
-      $uibModalInstance.close(
-        $scope.modalDatas  //在模态框View中修改的值传递回去，view中可以直接添加属性
-      );
-    };
+    // // $ctrl.insta
+    // $ctrl.ok = function (val) {
+    //   $scope.modalDatas.result = val;
+    //   $uibModalInstance.close(
+    //     $scope.modalDatas  //在模态框View中修改的值传递回去，view中可以直接添加属性
+    //   );
+    // };
     
-    $ctrl.cancel = function () {
-      $uibModalInstance.dismiss('cancel');
-    };
+    // $ctrl.cancel = function () {
+    //   $uibModalInstance.dismiss('cancel');
+    // };
 
     var model = $scope.model = {
         actionType: '',
@@ -84,7 +84,8 @@ angular.module('App', ['ui.bootstrap'])
             errorPlacement: function (error, element) { // render error placement for each input type
                 var icon = $(element).parent('.input-icon').children('i');
                 icon.removeClass('fa-check').addClass("fa-warning");  
-                icon.attr("data-original-title", error.text()).tooltip({'container': 'body'});
+                // icon.attr("data-original-title", error.text()).attr("data-trigger","click").tooltip({'container': 'body'});
+                icon.attr("data-original-title", error.text()).tooltip({'container': 'body', 'placement' : 'right'});
             },
             highlight: function (element) { // hightlight error inputs
                 $(element)

@@ -3,7 +3,7 @@
 // })()
 
 angular.module('App', ["kendo.directives", 'ui.bootstrap',"oc.lazyLoad"])
-.controller('appModalInstanceCtrl', function ($scope,$uibModalInstance,modalDatas,$ocLazyLoad,$http) {
+.controller('appModalInstanceCtrl', ['$scope','$uibModalInstance','modalDatas','$http',function ($scope,$uibModalInstance,modalDatas,$http) {
     var $ctrl = this;
     $scope.modalDatas = modalDatas; //双向绑定，方便在确认中回传可能修改的字段
    
@@ -102,7 +102,7 @@ angular.module('App', ["kendo.directives", 'ui.bootstrap',"oc.lazyLoad"])
             errorPlacement: function (error, element) { // render error placement for each input type
                 var icon = $(element).parent('.input-icon').children('i');
                 icon.removeClass('fa-check').addClass("fa-warning");  
-                icon.attr("data-original-title", error.text()).tooltip({'container': 'body'});
+                icon.attr("data-original-title", error.text()).tooltip({'placement' : 'right'});
             },
             highlight: function (element) { // hightlight error inputs
                 $(element)
@@ -125,13 +125,13 @@ angular.module('App', ["kendo.directives", 'ui.bootstrap',"oc.lazyLoad"])
     };
 
     $scope.submitForm = function(data, callback) {
-        $http.post("http://localhost:52151/project/Create1", data)
+        $http.post("http://localhost:52151/project/Create", data)
         .success(function (results) {
             callback(results);
         });
     };
 
-  })
+  }])
 .controller('ProjectController', ['$rootScope', '$scope', '$element', 'settings', '$http', '$q', '$uibModal', function ($rootScope, $scope, $element, settings, $http, $q, $uibModal) {
     // debugger;
     // $scope.$on('$viewContentLoaded', function () {
@@ -192,7 +192,7 @@ angular.module('App', ["kendo.directives", 'ui.bootstrap',"oc.lazyLoad"])
     var model = $scope.model = {
         pageInfo: {
             PageIndex: 1,
-            PageSize: 5,
+            PageSize: 10,
             SortField: "InDate",
             SortType: "DESC"
         },
@@ -395,8 +395,15 @@ angular.module('App', ["kendo.directives", 'ui.bootstrap',"oc.lazyLoad"])
                     type: "POST"
                 },
                 parameterMap: function (options, operation) {
-                    $scope.model.pageInfo.PageIndex = options.page;
-                    $scope.model.pageInfo.PageSize = options.pageSize;
+                    if(options) {
+                        $scope.model.pageInfo.PageIndex = options.page || $scope.model.pageInfo.PageIndex;
+                        $scope.model.pageInfo.PageSize = options.pageSize || $scope.model.pageInfo.PageSize;
+                        if(options.sort && options.sort.length > 0) {
+                            $scope.model.pageInfo.SortField = options.sort[0].field || $scope.model.pageInfo.SortField;
+                            $scope.model.pageInfo.SortType = options.sort[0].dir || $scope.model.pageInfo.SortType;
+                        }
+                        console.log(options);
+                    }
                     var requestPara = Object.assign($scope.model.requestPara, $scope.model.pageInfo);
                     return kendo.stringify(requestPara);
                 }
@@ -491,56 +498,103 @@ angular.module('App', ["kendo.directives", 'ui.bootstrap',"oc.lazyLoad"])
             { //表格列设置
                 field: "Version",
                 title: "Version",
-                width: "120px"
+                width: "100px",
+                headerAttributes: {  //列标题居中
+                    style: "text-align: center;font-weight: bold;vertical-align: middle;"
+                }
             }, {
                 field: "Status",
                 title: "Status",
-                width: "120px"
+                width: "115px",
+                headerAttributes: {  //列标题居中
+                    style: "text-align: center;font-weight: bold;vertical-align: middle;"
+                }
             }, {
                 field: "Jira",
-                width: "120px"
+                width: "110px",
+                template: "<a href='http://jira.newegg.org/browse/#: Jira #' target='_blank'>#: Jira #</a>",
+                headerAttributes: {  //列标题居中
+                    style: "text-align: center;font-weight: bold;vertical-align: middle;"
+                }
             }, {
                 field: "ProjectDescription",
-                width: "120px"
+                title: "ProjectDescription",
+                width: '500px',
+                headerAttributes: {  //列标题居中
+                    style: "text-align: center;font-weight: bold;vertical-align: middle;"
+                },
+                attributes: {style: "white-space:nowrap;text-overflow:ellipsis;"},  
+                sortable: false,
+                template: "<div style='white-space:nowrap;text-overflow:ellipsis;width:35em;-o-text-overflow:ellipsis; overflow:hidden;' title='{{dataItem.ProjectDescription}}'>{{dataItem.ProjectDescription}}</div>",
             }, {
                 field: "BSD",
-                width: "120px"
+                width: 120,
+                headerAttributes: {  //列标题居中
+                    style: "text-align: center;font-weight: bold;vertical-align: middle;"
+                },  
+                sortable: false
             }, {
                 field: "LocalPM",
-                width: "120px"
+                width: "120px",
+                headerAttributes: {  //列标题居中
+                    style: "text-align: center;font-weight: bold;vertical-align: middle;"
+                },  
+                sortable: false
             }, {
                 field: "Developer",
-                width: "120px"
+                width: "120px",
+                headerAttributes: {  //列标题居中
+                    style: "text-align: center;font-weight: bold;vertical-align: middle;"
+                },  
+                sortable: false
             }, {
                 field: "Tester",
-                width: "120px"
+                width: "120px",
+                headerAttributes: {  //列标题居中
+                    style: "text-align: center;font-weight: bold;vertical-align: middle;"
+                },  
+                sortable: false
             }, {
                 field: "StartDate",
                 width: "120px",
                 template: "#=  (StartDate == null)? '' : kendo.toString(kendo.parseDate(StartDate, 'yyyy-MM-dd'), 'MM/dd/yy') #",
+                headerAttributes: {  //列标题居中
+                    style: "text-align: center;font-weight: bold;vertical-align: middle;"
+                }
                 //format: "{0: MM/dd/yyyy}"  
             }, {
                 field: "TestDate",  
                 width: "120px",
-                format: "{0: MM/dd/yyyy}" 
+                format: "{0: MM/dd/yyyy}" ,
+                headerAttributes: {  //列标题居中
+                    style: "text-align: center;font-weight: bold;vertical-align: middle;"
+                }
             }, {
                 field: "ReleaseDate",
                 width: "120px",
-                format: "{0: MM/dd/yyyy}" 
+                format: "{0: MM/dd/yyyy}" ,
+                headerAttributes: {  //列标题居中
+                    style: "text-align: center;font-weight: bold;vertical-align: middle;"
+                }
             }, {
                 field: "LaunchDate",
                 width: "120px",
-                format: "{0: MM/dd/yyyy}" 
+                format: "{0: MM/dd/yyyy}" ,
+                headerAttributes: {  //列标题居中
+                    style: "text-align: center;font-weight: bold;vertical-align: middle;"
+                }
             }, {
                 field: "Memo",
                 headerAttributes: {  //列标题居中
-                    "class": "table-header-cell",
-                    style: "text-align: center;font-weight: bold;"
+                    //"class": "table-header-cell",
+                    style: "text-align: center;font-weight: bold;vertical-align: middle;"
                 },
-                attributes: { style: "text-align:center;" },  //列数据居左
+                // attributes: { style: "text-align:center;" },  //列数据居左
                 //列数据过长时，不换行，简略为 " ... "
                 //attributes: {style: "white-space:nowrap;text-overflow:ellipsis;"},
-                width: "120px"
+                width: "200px",  
+                sortable: false,
+                template: "<div style='width:13em; white-space:nowrap; text-overflow:ellipsis; -o-text-overflow:ellipsis; overflow:hidden;' title='{{dataItem.Memo}}'>{{dataItem.Memo}}</div>",
             }],
         editable: false  //是否可直接修改td
     };
