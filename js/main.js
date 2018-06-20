@@ -127,7 +127,7 @@ App.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
                             '../assets/global/plugins/morris/morris.min.js',
                             '../assets/global/plugins/morris/raphael-min.js',                            
                             '../assets/global/plugins/jquery.sparkline.min.js',
-                            '../assets/pages/scripts/dashboard.min.js',
+                            //'../assets/pages/scripts/dashboard.min.js',
                             'js/controllers/DashboardController.js',
                         ] 
                     });
@@ -136,11 +136,11 @@ App.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         })
 
         // Blank Page
-        .state('blank', {
-            url: "/blank",
-            templateUrl: "views/blank.html",            
-            data: {pageTitle: 'Blank Page Template'},
-            controller: "BlankController",
+        .state('user', {
+            url: "/user",
+            templateUrl: "views/user.html",            
+            data: {pageTitle: 'User Management'},
+            controller: "UserController",
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {
                     return $ocLazyLoad.load({
@@ -148,7 +148,7 @@ App.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
                         insertBefore: '#ng_load_plugins_before', // load the above css files before a LINK element with this ID. Dynamic CSS files must be loaded between core and theme css files
                         files: [
                             '../assets/global/css/components.min.css',  
-                            'js/controllers/BlankController.js'
+                            'js/controllers/UserController.js'
                         ] 
                     });
                 }]
