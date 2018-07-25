@@ -15,3 +15,19 @@ https://www.cnblogs.com/lzrabbit/archive/2012/04/22/2465313.html
 https://www.yiibai.com/ado.net/
 
 https://blog.csdn.net/kisscatforever/article/details/50714604
+
+
+
+
+
+
+https://www.google.com/search?q=sql+where+condition+if+else&ei=81pYW-rrD8ii-Qa0p5K4BA&start=10&sa=N&biw=1440&bih=777
+
+https://stackoverflow.com/questions/13171748/how-to-use-if-statement-in-where-clause-in-sql
+
+https://raresql.com/2013/06/28/sql-server-how-to-use-if-else-in-where-clause/
+
+https://bbs.csdn.net/topics/80123127
+
+
+https://stackoverflow.com/questions/18629132/conditional-where-clause-in-sql-server
