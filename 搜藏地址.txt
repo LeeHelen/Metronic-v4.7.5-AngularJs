@@ -50,3 +50,10 @@ https://blog.csdn.net/sadfishsc/article/details/7464858
 http://desk.zol.com.cn/bizhi/6927_86239_2.html
 
 https://codewith.mu/
+
+
+
+
+https://docs.microsoft.com/zh-cn/
+https://docs.microsoft.com/zh-cn/dotnet/csharp/
+https://docs.microsoft.com/zh-cn/sql/?view=sql-server-2017
