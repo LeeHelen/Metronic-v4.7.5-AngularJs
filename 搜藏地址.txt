@@ -87,3 +87,5 @@ https://developer.mozilla.org/zh-CN/docs/Web/JavaScript
 https://reactjs.org.cn/doc/hello-world.html
 http://cn.redux.js.org/
 https://ant.design/index-cn
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain
