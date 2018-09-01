@@ -93,3 +93,14 @@ https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prot
 
 
 https://huangxuan.me/2015/07/09/js-module-7day/
+https://paper.seebug.org/229/
+https://webpack.js.org/concepts/
+https://www.tangshuang.net/3126.html#title-1
+https://www.gulpjs.com.cn/
+http://www.ruanyifeng.com/blog/2016/10/npm_scripts.html
+https://www.kancloud.cn/digest/babel/217103
+https://www.cnblogs.com/sker/p/5482400.html
+
+https://webpack.js.org/
+https://www.babeljs.cn/
+https://reactjs.org/
