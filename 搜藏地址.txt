@@ -89,3 +89,7 @@ http://cn.redux.js.org/
 https://ant.design/index-cn
 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures
 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain
+
+
+
+https://huangxuan.me/2015/07/09/js-module-7day/
