@@ -124,3 +124,11 @@ https://react.docschina.org/docs/hello-world.html
 http://react.yubolun.com/docs/hello-world.html
 http://www.ruanyifeng.com/blog/2015/03/react.html
 http://wiki.jikexueyuan.com/project/react/
+
+
+
+http://www.cnblogs.com/ayqy/p/4471638.html
+https://ts.xcatliu.com/
+https://www.tslang.cn/
+http://www.ruanyifeng.com/blog/2011/06/birth_of_javascript.html
+http://www.cnblogs.com/ayqy/p/4471638.html
