@@ -141,3 +141,6 @@ https://www.jetbrains.com/help/resharper/2018.2/Speeding_Up_ReSharper.html
 chrome://flags/#top-chrome-md
 
 https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/concepts/index
+
+
+https://marketplace.visualstudio.com/items?itemName=MadsKristensen.FileNesting
