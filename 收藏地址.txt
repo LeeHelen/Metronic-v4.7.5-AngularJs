@@ -161,3 +161,56 @@ https://www.cnblogs.com/kushisei/p/6498473.html
 https://blog.csdn.net/yanhuatangtang/article/details/72780217
 
 https://firebase.google.com/docs/auth/?hl=zh-cn
+
+
+
+
+
+
+
+2.捞取User待发送数据的具体流程：
+
+第1步：每一个Task只会捞取一种Frequency(推送消息频率)的数据，所以先找出当前时间段(时间段确定规则举例：如果Frequency = 1 hours，且当前时间为01:30，即：当前处理的数据时间区间为：(01:00 - 02:00])未发送通知的USER对应的Sellers，由于Seller过多，所以设置参数：MaxProcessSellerCount 分批次处理这些Seller，此时获取的数据Json格式举例如下：
+
+[
+    {
+        "SellerID": "BHS9",
+        "User": [
+            {
+                "UserID": "100012",
+                "UserEmailAddress": "Kyle.Y.Li@newegg.com",
+                "DeviceToken": "0cd35e506b546c0327a52783b6dac40c766e0bc583fda558438b92816e9be0fe7e0aeff65b07439e",
+                "NotificationType": 0,
+                "PlatformCode": "USA"
+            },
+            {
+                "UserID": "100013",
+                "UserEmailAddress": "kl1m@newegg.com",
+				"DeviceToken"："6bc99bf63372b3bfa27e1759ae8f337e35c113cc004fb1e7987d463ce301032b98c582bc1163f76176af6a6cc7",
+                "DeviceToken": 1,
+                "PlatformCode": "USA"
+            }
+        ]
+    }
+]
+获取以上数据的SQL如下：
+
+ SELECT TOP (1000) SNS.[TransactionNumber]
+     ,SNS.[SellerID]
+     ,SNS.[UserID]
+     ,U.[UserEmailAddress]
+     ,SNS.[NotificationType]
+     ,SND.[DeviceToken]
+ FROM [dbo].[MPS_Seller_Notification_SubscriptionSettings] SNS WITH(NOLOCK)
+ INNER JOIN [dbo].[EDI_Seller_User] U WITH(NOLOCK)  ON SNS.[SellerID] = U.[SellerID]
+ INNER JOIN [dbo].[MPS_Seller_Notification_Devices] SND WITH(NOLOCK) ON U.[UserEmailAddress] = SND.[UserEmailAddress]
+ WHERE SNS.[Frequency] = 1   --限制频率 
+ AND SNS.[Enable] = 1  --允许消息推送
+ AND NOT EXISTS  --排除在本段时间已经推送过的User(假如当前时间为:2018-10-19 01:30:00)
+ (
+    SELECT TOP 1 1 FROM [dbo].[MPS_Seller_Notification_SentBuffer] SNS WITH(NOLOCK) 
+	WHERE SNS.[UserID] = SNS.[UserID] AND DATEDIFF(HOUR,SNS.[LastSentDate],GETDATE()) > 1
+ ) 
+ 
+
+ 
