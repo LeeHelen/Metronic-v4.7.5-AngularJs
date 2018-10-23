@@ -163,5 +163,5 @@ https://blog.csdn.net/yanhuatangtang/article/details/72780217
 https://firebase.google.com/docs/auth/?hl=zh-cn
 
 https://blog.csdn.net/ch21st/article/details/50991121
- 
- 
+https://codedefault.com/2018/linq-remove-duplicates-in-the-list-in-csharp-application
+https://www.cnblogs.com/wzf-Code/p/5611496.html
