@@ -188,3 +188,6 @@ foreach(T t in list)
 }
 return str;
 }
+
+
+http://npm.taobao.org/mirrors
