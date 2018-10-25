@@ -165,3 +165,26 @@ https://firebase.google.com/docs/auth/?hl=zh-cn
 https://blog.csdn.net/ch21st/article/details/50991121
 https://codedefault.com/2018/linq-remove-duplicates-in-the-list-in-csharp-application
 https://www.cnblogs.com/wzf-Code/p/5611496.html
+
+
+
+
+public static string GetObjectPropertyValue(IList<T> list, string propertyname)
+{
+ string str="";
+foreach(T t in list)
+{
+     Type type = typeof(T);
+  
+      PropertyInfo property = type.GetProperty(propertyname);
+  
+      if (property == null) return string.Empty;
+  
+      object o = property.GetValue(t, null);
+  
+      if (o == null) return string.Empty;
+  
+      str= o.ToString();
+}
+return str;
+}
