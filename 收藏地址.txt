@@ -191,3 +191,10 @@ return str;
 
 
 http://npm.taobao.org/mirrors
+
+
+
+
+https://www.cnblogs.com/Beau/p/3491063.html
+https://blog.csdn.net/tobbykwok/article/details/24934427
+https://blog.csdn.net/qq_23018459/article/details/79540786
