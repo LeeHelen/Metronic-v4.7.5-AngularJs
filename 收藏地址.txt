@@ -212,3 +212,4 @@ https://www.cnblogs.com/EasonJim/p/6556520.html
 https://www.cybrary.it/video/part-3-burpsuite/
 https://www.cybrary.it/course/secure-coding/
 https://www.cybrary.it/skill-certification-course/secure-coding-certification-training-course
+https://www.owasp.org/images/5/51/OWASP_Top_10_2013-Chinese-V1.2.pdf
