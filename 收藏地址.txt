@@ -235,6 +235,9 @@ public static IEnumerable<TSource> DistinctBy<TSource, TKey>
     }
 }
 
+var query = people.DistinctBy(p => p.Id);
+var query = people.DistinctBy(p => new { p.Id, p.Name });
+
 //result = result
             //    .GroupBy(t => new { t.PlatformCode, t.PM_ID })
             //    .Select(t => t.FirstOrDefault())
