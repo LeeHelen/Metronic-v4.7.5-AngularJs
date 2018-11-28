@@ -213,3 +213,37 @@ https://www.cybrary.it/video/part-3-burpsuite/
 https://www.cybrary.it/course/secure-coding/
 https://www.cybrary.it/skill-certification-course/secure-coding-certification-training-course
 https://www.owasp.org/images/5/51/OWASP_Top_10_2013-Chinese-V1.2.pdf
+
+
+
+
+
+
+
+
+
+public static IEnumerable<TSource> DistinctBy<TSource, TKey>
+    (this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
+{
+    HashSet<TKey> seenKeys = new HashSet<TKey>();
+    foreach (TSource element in source)
+    {
+        if (seenKeys.Add(keySelector(element)))
+        {
+            yield return element;
+        }
+    }
+}
+
+//result = result
+            //    .GroupBy(t => new { t.PlatformCode, t.PM_ID })
+            //    .Select(t => t.FirstOrDefault())
+            //    .ToList();
+            
+            
+            
+   //再次去重(同一个UserID + 同一个NotificationType + 同一个Token，确定唯一性)
+                sources = (from source in sources
+                           group source by new { source.UserID, source.NotificationType, source.DeviceToken }
+                    into s
+                           select s.FirstOrDefault()).ToList();         
