@@ -249,4 +249,10 @@ var query = people.DistinctBy(p => new { p.Id, p.Name });
                 sources = (from source in sources
                            group source by new { source.UserID, source.NotificationType, source.DeviceToken }
                     into s
-                           select s.FirstOrDefault()).ToList();         
+                           select s.FirstOrDefault()).ToList();        
+                           
+                           
+                           
+                           
+                           
+ https://docs.microsoft.com/zh-cn/dotnet/standard/parallel-programming/                          
