@@ -1,56 +1,20 @@
-﻿using Antlr4.StringTemplate;
 using System;
+using Antlr4.StringTemplate;
 
-namespace _4.StringTemplate4测试
+namespace _25.StringTemplate测试
 {
     class Program
     {
-        //https://www.cnblogs.com/lwme/category/243746.html
-
-        //[TestMethod]
-        //[TestCategory(TestCategories.ST4)]
-        //public void TestSeparatorInPrimitiveArray()
-        //{
-        //    TemplateGroup group = new TemplateGroup();
-        //    group.DefineTemplate("test", "<names:{n | case <n>}; separator=\", \">", new string[] { "names" });
-        //    Template st = group.GetInstanceOf("test");
-        //    st.Add("names", new int[] { 0, 1 });
-        //    string expected =
-        //        "case 0, case 1";
-        //    string result = st.Render();
-        //    Assert.AreEqual(expected, result);
-        //}
-
         static void Main(string[] args)
         {
-            //string templates = "$FromatSeller(SellerIDs)$ FromatSeller(SellerIDs) ::= { SellerIDs; wrap=\"\\n\", separator=\",\" };";
-
-            //TemplateGroup templateGroup = new TemplateGroupString("[string]", templates, '$', '$');
-
-            //Template st = templateGroup.GetInstanceOf("FromatSeller");
-            //st.Add("SellerIDs", new string[]{ "1","2" });
-
-            //string result = st.Render();
-
-
-            //Template e = new Template(
-            //    "<[SellerID]; separator=\",\">"
-            //);
-
-            //e.Add("SellerID", "Ter");
-            //e.Add("SellerID", "Tom");
-
-            //string str = e.Render();
-
             //UrlHostTemp();
-            //UrlSellerTemp();
-            //UrlSellerTemp1();
-            //UrlSellerTemp2();
-            UrlSellerTemp3();
-            //methodTemp();
-            //MethodTemp1();
+            //SellerTemp();
+            //SellerTemp1();
+            //SellerTemp2();
+            SellerTemp3();
         }
 
+        #region 其他测试
 
         public static void UrlHostTemp()
         {
@@ -59,6 +23,8 @@ namespace _4.StringTemplate4测试
             Template st = new Template(hostTemplate, '$', '$');
 
             st.Add("Host", "https://mps.newegg.org");
+
+            st.Add("Host1", "https://mps.newegg.org");
 
             string str = st.Render();
         }
@@ -147,24 +113,87 @@ namespace _4.StringTemplate4测试
             Template st = group.GetInstanceOf("FromatSeller");
             string result = st.Render();
         }
-    }
 
-    public static class RFQProcessLogProcessTemplate
-    {
-        public const string Send_RFQ_To_Seller = "{SellerID}";
+        #endregion
 
-        public const string Seller_Submit_Quotation = "{SellerID}, Quantity: {Quantity} Unit Price: ${UnitPrice}, Shipping Method: {ShipMethod}, Shipping Option: {ShippingChargeType} - ${ShippingCharge}</br>Total Amount: ${TotalAmount}";
+        public static void SellerTemp()
+        {
+            string templates = "SendRFQTemplate(SellerIds,Host) ::= \"$SellerIds:{SellerId|<a href=\\\"$Host$/Seller/About\\\" target=\\\"_blank\\\" title=\\\"测试\\\">$SellerId$</a>}; separator=\\\",\\\"$\"";
+            TemplateGroup templateGroup = new TemplateGroupString("[string]", templates, '$', '$');
+            Template e = templateGroup.GetInstanceOf("SendRFQTemplate");
+            e.Add("Host","http://newegg.com");
+            e.Add("SellerIds", "BG9H");
+            e.Add("SellerIds", "BHS9");
 
-        public const string Seller_Decline_Quotaion = "{SellerID}, Memo: {UserInputMemo}";
+            if (!e.impl.HasFormalArgs || (e.impl.HasFormalArgs && e.impl.TryGetFormalArgument("SellerIds1") != null))
+            {
+                e.Add("SellerIds1", "");
+            }
 
-        public const string Confirm_Seller_Offer = "{SellerID}, Quantity: {Quantity} Unit Price: ${UnitPrice}, Shipping Method: {ShipMethod}, Shipping Option: {ShippingChargeType} - ${ShippingCharge}</br>Total Amount: ${TotalAmount}";
+            string result = e.Render();
+        }
 
-        public const string Manual_Close_RFQ = "";
+        public static void SellerTemp1()
+        {
+            TemplateGroup templateGroup = new TemplateGroup('$', '$');
 
-        public const string Auto_Close_RFQ = "Closed by system automatically after offline order is placed";
+            templateGroup.DefineTemplate("SendRFQTemplate", "$SellerIds:{SellerId | <a href=\"$Host$/Seller/About\" target=\"_blank\" title=\"测试\">$SellerId$</a>}; separator=\", \"$", new string[] { "SellerIds" });
+            Template e = templateGroup.GetInstanceOf("SendRFQTemplate");
+            e.Add("SellerIds", new int[] { 1, 2 });
 
-        public const string Expire_RFQ = "Expired by system automatically after Expired Date is due, and no any seller quotation is confirmed.";
+            if (!e.impl.HasFormalArgs || (e.impl.HasFormalArgs && e.impl.TryGetFormalArgument("SellerIds1") != null))
+            {
+                e.Add("SellerIds1", "");
+            }
 
-        public const string Create_Order = "Order #: {OrderNumber}";
+            string result = e.Render();
+        }
+
+        public static void SellerTemp2()
+        {
+            Template e = new Template(
+                "$SellerIDs:{SellerID|<a href=\"$Host$\" target=\"_blank\">$SellerID$</a>}; separator=\",\"$", '$', '$'
+            );
+
+            e.Add("SellerIDs", new int[] { 1, 2 });
+            e.Add("SellerIDs11111", "Tom");
+            e.Add("Host", "https://mps.newegg.org");
+            string result = e.Render();
+        }
+
+        public static void SellerTemp3()
+        {
+            string newline = Environment.NewLine;
+
+            string templates = "SendRFQTemplate(SellerIds,Host) ::= \"$SellerIds:{SellerId|<a href=\\\"$Host$/Seller/About\\\" target=\\\"_blank\\\" title=\\\"$GetSellerName(SellerId)$\\\">$SellerId$</a>}; separator=\\\",\\\"$\"";
+            templates += newline + "OfflineOrderTemplate(OrderNumber) ::= \"Order #: $OrderNumber$\"";
+            templates += newline + "GetSellerName(SellerName) ::= \"$SellerName$\"";
+
+            TemplateGroup templateGroup = new TemplateGroupString("[string]", templates, '$', '$');
+
+            //发送RFQ
+            Template e = templateGroup.GetInstanceOf("SendRFQTemplate");
+            e.Add("Host", "http://newegg.com");
+            e.Add("SellerIds", "BG9H");
+            e.Add("SellerIds", "BHS9");
+
+            if (!e.impl.HasFormalArgs || (e.impl.HasFormalArgs && e.impl.TryGetFormalArgument("SellerIds1") != null))
+            {
+                e.Add("SellerIds1", "");
+            }
+
+            string result = e.Render();
+
+            //离线订单
+            e = templateGroup.GetInstanceOf("OfflineOrderTemplate");
+            e.Add("OrderNumber", "1234567890");
+            result += e.Render();
+        }
     }
 }
+
+
+
+https://www.cnblogs.com/lwme/category/243746.html
+https://blog.csdn.net/zhanglei5415/article/details/3611406?utm_source=blogxgwz1
+https://blog.csdn.net/u011704663/article/details/79847229
