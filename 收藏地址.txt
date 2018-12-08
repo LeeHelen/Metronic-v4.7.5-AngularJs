@@ -259,3 +259,7 @@ var query = people.DistinctBy(p => new { p.Id, p.Name });
  https://stackoverflow.com/questions/38556753/how-can-i-mock-a-method-that-returns-a-taskilist?rq=1
 https://npm.taobao.org/
 http://docs.automapper.org/en/stable/8.0-Upgrade-Guide.html
+
+
+https://docs.microsoft.com/zh-cn/dotnet/core/packages
+https://docs.microsoft.com/zh-cn/aspnet/core/?view=aspnetcore-2.2
