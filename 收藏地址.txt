@@ -264,3 +264,10 @@ http://docs.automapper.org/en/stable/8.0-Upgrade-Guide.html
 https://docs.microsoft.com/zh-cn/dotnet/core/packages
 https://docs.microsoft.com/zh-cn/aspnet/core/?view=aspnetcore-2.2
 https://docs.microsoft.com/zh-cn/dotnet/standard/base-types/?view=aspnetcore-2.2
+https://docs.microsoft.com/zh-cn/dotnet/api/system.net?view=netframework-4.7.2
+
+https://docs.microsoft.com/zh-cn/dotnet/api/system.action?view=netframework-4.7.2
+https://docs.microsoft.com/zh-cn/dotnet/api/system.func-1?view=netframework-4.7.2
+
+学习到：
+https://docs.microsoft.com/zh-cn/dotnet/standard/using-linq?view=aspnetcore-2.2
