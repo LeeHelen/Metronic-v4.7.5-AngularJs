@@ -263,3 +263,4 @@ http://docs.automapper.org/en/stable/8.0-Upgrade-Guide.html
 
 https://docs.microsoft.com/zh-cn/dotnet/core/packages
 https://docs.microsoft.com/zh-cn/aspnet/core/?view=aspnetcore-2.2
+https://docs.microsoft.com/zh-cn/dotnet/standard/base-types/?view=aspnetcore-2.2
