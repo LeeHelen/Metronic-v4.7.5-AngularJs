@@ -272,3 +272,7 @@ https://docs.microsoft.com/zh-cn/dotnet/api/system.func-1?view=netframework-4.7.
 学习到：
 https://docs.microsoft.com/zh-cn/dotnet/standard/using-linq?view=aspnetcore-2.2
 https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/statements-expressions-operators/anonymous-functions
+
+
+
+https://www.w3cschool.cn/wkcsharp/3df41j39.html
