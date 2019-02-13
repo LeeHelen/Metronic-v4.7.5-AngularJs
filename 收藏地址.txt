@@ -286,3 +286,10 @@ https://www.cnblogs.com/GreenLeaves/p/9068793.html
 
 
 https://github.com/octocean26/Dazzle-DotNETCore
+
+
+https://coding.net/help/doc/project/markdown.html
+http://wow.kuapp.com/markdown/index.html
+https://markdown-zh.readthedocs.io/en/latest/
+http://www.markdown.cn/
+https://github.com/octocean26/Dazzle-DotNETCore/tree/master/notes
