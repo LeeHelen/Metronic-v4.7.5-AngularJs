@@ -297,3 +297,14 @@ https://github.com/octocean26/Dazzle-DotNETCore/tree/master/notes
 
 http://www.mybatis.org/mybatis-3/zh/index.html
 https://www.jianshu.com/p/533904e554f1
+
+
+
+
+
+	ES6标准入门（第3版）	￥89.10	https://item.jd.com/12172449.html
+	ASP.NET MVC 5 框架揭秘	￥79.90	https://item.jd.com/11514830.html
+	ASP.NET Core跨平台开发从入门到实战	￥51.10	https://item.jd.com/12063817.html
+	大话设计模式	￥38.30	https://item.jd.com/10079261.html
+	Python核心编程（第3版）	￥78.20	https://item.jd.com/11936238.html
+	Docker技术入门与实战 第2版	￥54.90	https://item.jd.com/12121728.html
