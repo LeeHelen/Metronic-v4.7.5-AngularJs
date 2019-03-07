@@ -312,3 +312,4 @@ https://www.jianshu.com/p/533904e554f1
 
 
 https://www.cnblogs.com/csdbfans/p/TransactionScope.html
+https://segmentfault.com/a/1190000003031456
