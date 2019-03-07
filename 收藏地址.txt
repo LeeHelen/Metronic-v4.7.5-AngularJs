@@ -308,3 +308,7 @@ https://www.jianshu.com/p/533904e554f1
 	大话设计模式	￥38.30	https://item.jd.com/10079261.html
 	Python核心编程（第3版）	￥78.20	https://item.jd.com/11936238.html
 	Docker技术入门与实战 第2版	￥54.90	https://item.jd.com/12121728.html
+
+
+
+https://www.cnblogs.com/csdbfans/p/TransactionScope.html
