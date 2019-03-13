@@ -319,3 +319,6 @@ https://cn.rx.js.org/manual/overview.html#observable
 
 http://www.fly63.com/article/detial/461
 https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array
+
+
+https://git-scm.com/book/zh/v2
