@@ -342,3 +342,4 @@ http://es6.ruanyifeng.com/
 http://caibaojian.com/es6/
 http://caibaojian.com/book/
 http://caibaojian.com/nodejs/
+http://caibaojian.com/nodejs/api/documentation.html
