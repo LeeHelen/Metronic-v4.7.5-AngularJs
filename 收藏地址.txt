@@ -343,3 +343,6 @@ http://caibaojian.com/es6/
 http://caibaojian.com/book/
 http://caibaojian.com/nodejs/
 http://caibaojian.com/nodejs/api/documentation.html
+
+
+https://docs.microsoft.com/zh-cn/aspnet/core/performance/caching/response?view=aspnetcore-2.2
