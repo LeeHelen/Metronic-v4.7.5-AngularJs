@@ -348,3 +348,7 @@ http://caibaojian.com/nodejs/api/documentation.html
 https://docs.microsoft.com/zh-cn/aspnet/core/performance/caching/response?view=aspnetcore-2.2
 https://docs.microsoft.com/zh-cn/aspnet/core/performance/response-compression?view=aspnetcore-2.2
 https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/xmldoc/para
+
+https://www.cnblogs.com/DomoYao/p/Json.html
+http://www.cnblogs.com/yanweidie/p/4605212.html
+http://www.cnblogs.com/yanweidie/p/5155268.html
