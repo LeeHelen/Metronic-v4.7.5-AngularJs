@@ -370,3 +370,6 @@ http://bbs.bugcode.cn/t/1231
 https://blog.csdn.net/kirawoo/article/details/51496174
 https://blog.csdn.net/sjt223857130/article/details/80480222
 https://try.redis.io/
+
+http://www.cnblogs.com/leoo2sk/archive/2010/10/01/hash-and-encrypt.html
+https://825635381.iteye.com/blog/2276077
