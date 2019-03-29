@@ -369,3 +369,4 @@ https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Authentication
 http://bbs.bugcode.cn/t/1231
 https://blog.csdn.net/kirawoo/article/details/51496174
 https://blog.csdn.net/sjt223857130/article/details/80480222
+https://try.redis.io/
