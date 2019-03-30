@@ -373,3 +373,6 @@ https://try.redis.io/
 
 http://www.cnblogs.com/leoo2sk/archive/2010/10/01/hash-and-encrypt.html
 https://825635381.iteye.com/blog/2276077
+
+
+https://www.cnblogs.com/junbird-nest/archive/2012/04/10/2439828.html
