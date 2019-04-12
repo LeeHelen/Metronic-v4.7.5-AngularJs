@@ -381,3 +381,5 @@ https://www.cnblogs.com/dc20181010/p/10654965.html
 https://blog.strongbrew.io/the-sip-principle/
 
 https://www.draw.io/
+
+https://rxviz.com/examples/mouse-move
