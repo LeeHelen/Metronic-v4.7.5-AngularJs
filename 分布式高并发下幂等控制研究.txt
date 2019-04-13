@@ -1,0 +1,16 @@
+http幂等 pdf
+REDIS 生成uuid
+幂等设计
+
+https://httpstatuses.com/
+
+https://developer.mozilla.org/zh-CN/docs/Glossary
+https://developer.mozilla.org/zh-CN/docs/Glossary/%E5%B9%82%E7%AD%89
+
+https://www.cnblogs.com/weidagang2046/archive/2011/06/04/idempotence.html
+https://sofish.github.io/restcookbook/http%20methods/idempotency/
+https://zhuanlan.zhihu.com/p/46442446
+https://cloud.tencent.com/developer/article/1157509
+
+http://www.cnblogs.com/firstdream/p/7089735.html
+http://www.cnblogs.com/wxgblogs/p/6639272.html
