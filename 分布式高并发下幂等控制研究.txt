@@ -1,6 +1,7 @@
 http幂等 pdf
-REDIS 生成uuid
+redis 生成uuid
 幂等设计
+redis 原子锁
 
 https://httpstatuses.com/
 
@@ -14,3 +15,17 @@ https://cloud.tencent.com/developer/article/1157509
 
 http://www.cnblogs.com/firstdream/p/7089735.html
 http://www.cnblogs.com/wxgblogs/p/6639272.html
+
+https://www.jianshu.com/p/c3f305a1de6e
+https://825635381.iteye.com/blog/2276077
+
+http://www.sohu.com/a/209828540_505901
+https://blog.csdn.net/CHS007chs/article/details/69524523
+
+https://blog.csdn.net/chenaini119/article/details/74942821
+https://blog.csdn.net/CHS007chs/article/details/69524523
+
+http://ukagaka.github.io/php/2017/05/21/Restful_API.html
+http://www.ruanyifeng.com/blog/2014/05/restful_api.html
+
+http://ukagaka.github.io/php/2017/09/21/redisLock.html
