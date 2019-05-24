@@ -43,3 +43,15 @@ https://blog.csdn.net/qq_33556185/article/details/79427271
 https://msgpack.org/
 
 https://blog.csdn.net/love20yh/article/details/81327345
+
+
+
+
+//Incrby number 5
+            //http://try.redis.io/
+            //https://redis.readthedocs.io/en/2.4/hash.html
+            //http://redis.cn/commands/hincrby.html
+            //http://cmsblogs.com/?p=3906
+            //https://blog.51cto.com/wl133/1729094
+            //https://blog.csdn.net/jaryle/article/details/54668353
+            //https://blog.csdn.net/Roy_70/article/details/78260826
