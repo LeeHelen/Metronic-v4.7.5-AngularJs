@@ -61,3 +61,5 @@ https://blog.csdn.net/love20yh/article/details/81327345
 https://blog.csdn.net/zml879630422/article/details/80548659
 https://blog.csdn.net/qq_37725650/article/details/80821293
 https://blog.csdn.net/qq_35038153/article/details/79675728
+
+https://docs.microsoft.com/zh-cn/aspnet/core/performance/caching/distributed?view=aspnetcore-2.2
