@@ -68,3 +68,15 @@ https://docs.microsoft.com/zh-cn/aspnet/core/performance/caching/distributed?vie
 https://docs.microsoft.com/zh-tw/dotnet/api/system.linq.expressions.expression.call?view=netframework-4.7.2
 https://www.cnblogs.com/akwwl/p/3232679.html
 https://www.cnblogs.com/liqingwen/p/5868688.html
+
+
+RedisDesktopManager
+
+
+
+
+
+
+
+
+
