@@ -80,3 +80,656 @@ RedisDesktopManager
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public class RedisConnectionService : ICacheConnectionService
+    {
+        private const string CacheConnectMethodName = "Connect";
+        private const string CacheConnectionFieldName = "_connection";
+        private const string CacheDatabaseFieldName = "_cache";
+        private const BindingFlags BindingAttr = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.IgnoreCase;
+
+        // 缓存需要查找的 方法 或 字段 的实例
+        private static MethodInfo _connectMethod;
+        private static FieldInfo _connectionField;
+        private static FieldInfo _databaseField;
+        private static Action<RedisCache> _connectMethodExpression;
+
+        private readonly IDistributedCache _cache;
+        public RedisConnectionService(IDistributedCache cache)
+        {
+            _cache = cache;
+        }
+
+        public void ExecConnect()
+        {
+            if (!(_cache is RedisCache)) throw new ArgumentOutOfRangeException(nameof(_cache));
+
+            // Get Connect() Instance
+            _connectMethod = _connectMethod ?? this.GetMethodInstance(_cache, CacheConnectMethodName);
+
+            if (_connectMethod == null) throw new NullReferenceException(nameof(_connectMethod));
+
+            // Exec Connect()
+            _connectMethodExpression = _connectMethodExpression ?? this.CreateMethodExpression(_connectMethod);
+
+            if (_connectMethodExpression == null) throw new NullReferenceException(nameof(_connectMethodExpression));
+
+            //_connectMethod.Invoke(_cache, new object[] { });
+            _connectMethodExpression((RedisCache) _cache);
+        }
+
+        public ConnectionMultiplexer GetConnectionMultiplexer()
+        {
+            ExecConnect();
+
+            _connectionField = _connectionField ?? this.GetFieldInstance(_cache, CacheConnectionFieldName);
+
+            if (_connectionField == null) throw new NullReferenceException(nameof(_connectionField));
+
+            return GetFieldObject<ConnectionMultiplexer>(_cache, _connectionField);
+        }
+
+        public EndPoint[] GetEndPoints()
+        {
+            ConnectionMultiplexer connectionMultiplexer = GetConnectionMultiplexer();
+
+            if (connectionMultiplexer == null) throw new NullReferenceException(nameof(connectionMultiplexer));
+
+            return connectionMultiplexer.GetEndPoints();
+        }
+
+        public IServer GetServer(EndPoint endpoint)
+        {
+            ConnectionMultiplexer connectionMultiplexer = GetConnectionMultiplexer();
+
+            if(connectionMultiplexer == null) throw new NullReferenceException(nameof(connectionMultiplexer));
+
+            return connectionMultiplexer.GetServer(endpoint);
+        }
+
+        public IDatabase GetDatabase()
+        {
+            ExecConnect();
+
+            _databaseField = _databaseField ?? this.GetFieldInstance(_cache, CacheDatabaseFieldName);
+
+            if (_databaseField == null) throw new NullReferenceException(nameof(_databaseField));
+
+            return this.GetFieldObject<IDatabase>(_cache, _databaseField);
+        }
+
+        /// <summary>
+        /// 获取对象指定的字段
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="cache"></param>
+        /// <param name="fieldName"></param>
+        /// <returns></returns>
+        private T GetFieldObject<T>(IDistributedCache cache, string fieldName) where T : class
+        {
+            FieldInfo fieldInfo = GetFieldInstance(cache, fieldName);
+
+            if (fieldInfo == null) throw new NullReferenceException(nameof(fieldInfo));
+
+            return fieldInfo.GetValue(cache) as T;
+        }
+
+        /// <summary>
+        /// 获取对象指定的字段
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="cache"></param>
+        /// <param name="field"></param>
+        /// <returns></returns>
+        private T GetFieldObject<T>(IDistributedCache cache, FieldInfo field) where T : class
+        {
+            if (field == null) throw new NullReferenceException(nameof(field));
+
+            return field.GetValue(cache) as T;
+        }
+
+        /// <summary>
+        /// 获取对象指定的字段实例
+        /// </summary>
+        /// <param name="cache"></param>
+        /// <param name="fieldName"></param>
+        /// <returns></returns>
+        private FieldInfo GetFieldInstance(IDistributedCache cache, string fieldName)
+        {
+            Type type = GetType(cache);
+
+            if (type == null) throw new NullReferenceException(nameof(type));
+
+            return type.GetField(fieldName, BindingAttr);
+        }
+
+        /// <summary>
+        /// 获取指定的方法实例
+        /// </summary>
+        /// <param name="cache"></param>
+        /// <param name="methodName"></param>
+        /// <returns></returns>
+        private MethodInfo GetMethodInstance(IDistributedCache cache, string methodName)
+        {
+            Type type = GetType(cache);
+
+            if (type == null) throw new NullReferenceException(nameof(type));
+
+            return type.GetMethod(methodName, BindingAttr);
+        }
+
+        /// <summary>
+        /// 生成执行方法的委托
+        /// </summary>
+        /// <param name="method"></param>
+        /// <returns></returns>
+        private Action<RedisCache> CreateMethodExpression(MethodInfo method)
+        {
+            if (method == null) throw new ArgumentNullException(nameof(method));
+
+            // 参数
+            ParameterExpression parameter = Expression.Parameter(typeof(RedisCache));
+            //ParameterExpression parameter = Expression.Variable(typeof(RedisCache));
+
+            // 表达式
+            MethodCallExpression body = Expression.Call(parameter, method);
+
+            // 编译成委托
+            return Expression.Lambda<Action<RedisCache>>(body, parameter).Compile();
+        }
+
+        /// <summary>
+        /// 获取Type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        private Type GetType<T>(T t) where T : class
+        {
+            if (t == null) throw new ArgumentNullException(nameof(t)); 
+
+            return t.GetType();
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // https://blog.csdn.net/u011511086/article/details/84029954
+    // https://www.cnblogs.com/qtqq/p/5951201.html
+    // https://www.cnblogs.com/liqingwen/p/6672452.html
+    // https://www.cnblogs.com/llsfast/p/7880195.html
+
+    public class RedisClientService : IRedisClientService
+    {
+        private const string LockKey = "lock_LockTake";
+
+        private IDatabase _redisClient;
+
+
+        private readonly ICacheConnectionService _connectionService;
+
+        public RedisClientService(ICacheConnectionService connectionService)
+        {
+            _connectionService = connectionService;
+        }
+
+        /// <summary>
+        /// 执行Redis事务
+        /// </summary>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public bool RedisTransaction(Action<ITransaction> action)
+        {
+            _redisClient = _connectionService.GetDatabase();
+            ITransaction tran = _redisClient.CreateTransaction();
+            action.Invoke(tran);
+            return tran.Execute();
+        }
+
+        /// <summary>
+        /// Redis锁
+        /// </summary>
+        /// <param name="action"></param>
+        /// <param name="timeSpan">锁住时间</param>
+        public void RedisLockTake(Action action, TimeSpan timeSpan)
+        {
+            _redisClient = _connectionService.GetDatabase();
+            RedisValue token = Environment.MachineName;
+            if (!_redisClient.LockTake(LockKey, token, timeSpan)) return;
+            try
+            {
+                action();
+            }
+            finally
+            {
+                _redisClient.LockRelease(LockKey, token);
+            }
+        }
+
+        /// <summary>
+        /// 判断key是否存在
+        /// </summary>
+        /// <param name="keyName"></param>
+        /// <returns></returns>
+        public bool KeyExists(string keyName)
+        {
+            _redisClient = _connectionService.GetDatabase();
+            return _redisClient.KeyExists(keyName);
+        }
+
+        /// <summary>
+        /// 重新命名key
+        /// </summary>
+        /// <param name="keyName"></param>
+        /// <param name="newKeyName"></param>
+        /// <returns></returns>
+        public bool KeyRename(string keyName, string newKeyName)
+        {
+            _redisClient = _connectionService.GetDatabase();
+            return _redisClient.KeyRename(keyName, newKeyName);
+        }
+
+        /// <summary>
+        /// 设置Key的过期时间
+        /// </summary>
+        /// <param name="keyName"></param>
+        /// <param name="expiry"></param>
+        /// <returns></returns>
+        public bool KeyExpire(string keyName, TimeSpan? expiry = null)
+        {
+            _redisClient = _connectionService.GetDatabase();
+            return _redisClient.KeyExpire(keyName, expiry);
+        }
+
+        /// <summary>
+        /// 获取Key
+        /// </summary>
+        /// <param name="keyName"></param>
+        /// <returns></returns>
+        public RedisValue GetKey(string keyName)
+        {
+            _redisClient = _connectionService.GetDatabase();
+
+            return _redisClient.StringGet(keyName);
+        }
+
+        /// <summary>
+        /// 获取Key
+        /// </summary>
+        /// <param name="keyName"></param>
+        /// <returns></returns>
+        public T GetKey<T>(string keyName)
+        {
+            if (keyName.IsNullOrEmpty()) return default(T);
+
+            _redisClient = _connectionService.GetDatabase();
+
+            RedisValue value = _redisClient.StringGet(keyName);
+
+            return value.IsNullOrEmpty || !value.HasValue ? default(T) : ToJsonObject<T>(value);
+        }
+
+        /// <summary>
+        /// 模糊查询以keyName为前缀的Key
+        /// </summary>
+        /// <param name="keyNamePrefix"></param>
+        /// <returns></returns>
+        public RedisKey[] GetKeyLike(string keyNamePrefix)
+        {
+            if (keyNamePrefix.IsNullOrEmpty()) return null;
+
+            string pattern = $"{keyNamePrefix}*";
+
+            RedisResult redisResult = Execute("KEYS", pattern);
+
+            if (redisResult.IsNull) return null;
+
+            return (RedisKey[])redisResult;
+        }
+
+        /// <summary>
+        /// 模糊查询以keyName为前缀的Key
+        /// </summary>
+        /// <param name="keyNamePrefix"></param>
+        /// <returns></returns>
+        public RedisKey[] GetKeyLikeScriptEvaluate(string keyNamePrefix)
+        {
+            if (keyNamePrefix.IsNullOrEmpty()) return null;
+
+            _redisClient = _connectionService.GetDatabase();
+
+            string pattern = $"{keyNamePrefix}*";
+            RedisResult redisResult = _redisClient.ScriptEvaluate(
+                LuaScript.Prepare(" return redis.call('KEYS', @keypattern) "),
+                new {@keypattern = pattern});
+
+            if(redisResult.IsNull) return null;
+
+            return (RedisKey[]) redisResult;
+        }
+
+        /// <summary>
+        /// 设置Key
+        /// </summary>
+        /// <param name="keyName"></param>
+        /// <param name="value"></param>
+        /// <param name="expiry"></param>
+        /// <returns></returns>
+        public bool KeySet(string keyName, string value, TimeSpan? expiry = null)
+        {
+            _redisClient = _connectionService.GetDatabase();
+
+            return _redisClient.StringSet(keyName, value, expiry);
+        }
+
+        /// <summary>
+        /// 设置Key
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="keyName"></param>
+        /// <param name="value"></param>
+        /// <param name="expiresAt"></param>
+        /// <returns></returns>
+        public bool KeySet<T>(string keyName, T value, TimeSpan? expiresAt = null)
+        {
+            if (keyName.IsNullOrEmpty() || value == null) return false;
+
+            return KeySet(keyName, ToJsonString(value), expiresAt);
+        }
+
+        /// <summary>
+        /// 设置Key自增
+        /// </summary>
+        /// <param name="keyName"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public long KeySetIncrement(string keyName, long value)
+        {
+            _redisClient = _connectionService.GetDatabase();
+
+            return _redisClient.StringIncrement(keyName, value);
+        }
+
+        /// <summary>
+        /// 删除单个key
+        /// </summary>
+        /// <param name="keyName"></param>
+        /// <returns></returns>
+        public bool KeyDelete(string keyName)
+        {
+            _redisClient = _connectionService.GetDatabase();
+
+            return _redisClient.KeyDelete(keyName);
+        }
+
+        /// <summary>
+        /// 删除多个key
+        /// </summary>
+        /// <param name="keys"></param>
+        /// <returns></returns>
+        public long KeyDelete(params string[] keys)
+        {
+            if (keys.IsNullOrEmpty()) return 0;
+
+            _redisClient = _connectionService.GetDatabase();
+
+            RedisKey[] newKeys = keys.Select(key => (RedisKey)key).ToArray();
+            return _redisClient.KeyDelete(newKeys);
+        }
+
+        /// <summary>
+        /// 将string类型的Key转换成 <see cref="RedisKey"/> 型的Key
+        /// </summary>
+        /// <param name="keys"></param>
+        /// <returns></returns>
+        public RedisKey[] ConvertRedisKeys(List<string> keys)
+        {
+            if (keys.IsNullOrEmpty()) return null;
+
+            _redisClient = _connectionService.GetDatabase();
+
+            return keys.Select(key => (RedisKey)key).ToArray();
+        }
+
+        /// <summary>
+        /// 将string类型的Key转换成 <see cref="RedisKey"/> 型的Key
+        /// </summary>
+        /// <param name="keys"></param>
+        /// <returns></returns>
+        public RedisKey[] ConvertRedisKeys(params string[] keys)
+        {
+            if (keys.IsNullOrEmpty()) return null;
+
+            _redisClient = _connectionService.GetDatabase();
+
+            return keys.Select(key => (RedisKey)key).ToArray();
+        }
+
+        /// <summary>
+        /// 直接执行Redis命令
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="args"></param>
+        public bool ExecuteSuccessful(string command, params object[] args)
+        {
+            if (command.IsNullOrEmpty()) return false;
+
+            return Execute(command, args).IsNull;
+        }
+
+        /// <summary>
+        /// 直接执行Redis命令
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public RedisResult Execute(string command, params object[] args)
+        {
+            if (command.IsNullOrEmpty()) return null;
+
+            _redisClient = _connectionService.GetDatabase();
+
+            RedisResult redisResult = _redisClient.Execute(command, args);
+
+            return redisResult;
+        }
+
+        /// <summary>
+        /// Convert object to json
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private string ToJsonString(object value)
+        {
+            if (value == null) return string.Empty;
+
+            if (IsSimpleType(value.GetType())) return Convert.ToString(value);
+
+            return JsonConvert.SerializeObject(value, JsonSerializerSettingConst.DefaultSetting);
+        }
+
+        /// <summary>
+        /// Convert json to object
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private T ToJsonObject<T>(RedisValue value)
+        {
+            return value.IsNullOrEmpty ? default(T) : JsonConvert.DeserializeObject<T>(value);
+        }
+
+        /// <summary>
+        /// 是否为简单类型
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        private bool IsSimpleType(Type type)
+        {
+            // nullable type, check if the nested type is simple.
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+                return IsSimpleType(type.GetGenericArguments()[0]);
+
+            return type.IsPrimitive
+                   || type.IsEnum
+                   || type == typeof(string)
+                   || type == typeof(decimal);
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public class MailService : IMailService
+    {
+        private const string MailKeyCommonPrefix = "MKPL_MAIL";
+        private const string MailUniqueIdKey = "MKPL_MAIL_UUID";
+
+        // 100秒内同一个Domain最大请求数量
+        private const Int32 DomainRequestMaxNum = 1000;
+        // Ticket过期时间(Minutes)
+        private const Int32 TicketExpireDate = 30;
+
+
+        private readonly HttpContext _httpContext;
+        private readonly IMQClient _mqClient;
+        private readonly IRedisClientService _redisClient;
+
+        public MailService(IHttpContextAccessor httpContextAccessor, IMQClient mqClient, IRedisClientService redisClient)
+        {
+            _httpContext = httpContextAccessor.HttpContext;
+            _mqClient = mqClient;
+            _redisClient = redisClient;
+        }
+
+        /// <summary>
+        /// 生成Ticket  
+        /// </summary>
+        /// <param name="domainSource">来源领域</param>
+        /// <returns></returns>
+        public string GenerateMailTicket(string domainSource)
+        {
+            if (domainSource.IsNullOrEmpty())
+                throw new ArgumentNullException(nameof(domainSource));
+
+            // Mail Unique Id
+            Int64 uniqueId = GetMailUniqueId();
+
+            //string ip = _httpContext.GetClientUserIp();
+            string unixTimeSeconds = DateTime.Now.GetUnixTimestamp().ToString();
+
+            // key前缀
+            string mailKeyPrefix = $"{MailKeyCommonPrefix}_{domainSource}";
+
+            // 判断是否请求过快
+            string oneHundredSecondBeforeTicketKey = $"{mailKeyPrefix}_{unixTimeSeconds.Remove(unixTimeSeconds.Length - 2, 2)}";
+            bool isFrequent = IsRequestFrequent(oneHundredSecondBeforeTicketKey, DomainRequestMaxNum);
+            if (isFrequent)
+            {
+                throw new WebException(nameof(MailService), WebExceptionStatus.ConnectionClosed);
+            }
+
+            // 设置每个Mail的Ticket key
+            string ticketKey = $"{mailKeyPrefix}_{unixTimeSeconds}_{uniqueId}";
+
+            // 保存Ticket，过期时间30分钟
+            _redisClient.KeySet(ticketKey, (Int16)MailStatusEnum.Init, TimeSpan.FromMinutes(TicketExpireDate));
+
+            return ticketKey;
+        }
+
+        /// <summary>
+        /// 获取mail唯一自增Id
+        /// </summary>
+        /// <returns></returns>
+        private Int64 GetMailUniqueId()
+        {
+            // 利用Redis的原子递增，生成全局唯一Id.
+            if (_redisClient.KeyExists(MailUniqueIdKey))
+                _redisClient.KeySetIncrement(MailUniqueIdKey, 1);
+            else
+                _redisClient.KeySet(MailUniqueIdKey, 1);
+
+            return _redisClient.GetKey<Int64>(MailUniqueIdKey);
+        }
+
+        /// <summary>
+        /// 是否请求频繁
+        /// </summary>
+        /// <param name="keyNamePrefix"></param>
+        /// <param name="maxNumber"></param>
+        /// <returns></returns>
+        private bool IsRequestFrequent(string keyNamePrefix, Int32 maxNumber)
+        {
+            if (string.IsNullOrWhiteSpace(keyNamePrefix) || maxNumber < 1) return false;
+
+            RedisKey[] keys = _redisClient.GetKeyLike(keyNamePrefix);
+
+            return keys != null && keys.Length >= maxNumber;
+        }
+    }
+
