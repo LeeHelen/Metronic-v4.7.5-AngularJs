@@ -733,3 +733,6 @@ public class RedisConnectionService : ICacheConnectionService
         }
     }
 
+
+https://gitee.com/MaxBill/RedisPlus/releases
+https://www.jianshu.com/p/721c3762a777
