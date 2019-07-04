@@ -766,3 +766,16 @@ https://www.redis.net.cn/
 
 apache-jmeter-2.13
 
+
+
+
+
+https://blog.csdn.net/ahilll/article/details/82787240
+https://yangshunjie.com/A-Middleware-Implement-For-Customized-Routing-In-AspNetCore.html
+https://www.cnblogs.com/savorboard/p/dontnet-IApplicationModelConvention.html
+https://docs.microsoft.com/zh-cn/aspnet/core/mvc/controllers/routing?view=aspnetcore-2.2
+https://www.strathweb.com/2016/06/global-route-prefix-with-asp-net-core-mvc-revisited/
+
+
+
+
