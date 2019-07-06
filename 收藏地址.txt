@@ -777,7 +777,7 @@ https://docs.microsoft.com/zh-cn/aspnet/core/mvc/controllers/routing?view=aspnet
 https://www.strathweb.com/2016/06/global-route-prefix-with-asp-net-core-mvc-revisited/
 
 
-
+https://www.cnblogs.com/artech/p/asp-net-core-di-ioc.html
 
 https://blog.csdn.net/WPwalter/article/details/79673214
 https://blog.walterlv.com/post/deadlock-in-task-wait.html
