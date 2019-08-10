@@ -797,3 +797,5 @@ http://www.skcircle.com/?id=199
 https://blog.csdn.net/qq285679784/article/details/88864222
 https://www.cnblogs.com/daxnet/archive/2013/05/07/3064577.html
 https://github.com/NuGetPackageExplorer/NuGetPackageExplorer/releases
+
+https://www.cnblogs.com/icebutterfly/archive/2012/02/06/2340313.html
