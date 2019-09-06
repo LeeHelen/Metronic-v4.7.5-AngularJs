@@ -852,3 +852,4 @@ Compare Plugin、XML Tools、JSON Viewer、MarkdownViewer++
 
 
 https://www.cnblogs.com/clsn/p/7885990.html
+https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/classes-and-structs/local-functions
