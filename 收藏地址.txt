@@ -866,3 +866,7 @@ https://www.ibm.com/developerworks/cn/opensource/os-cn-elk/index.html
 
 
 http://www.hechaku.com/sqlfunction/SQL_TRIM__hanshu.html
+
+
+
+https://zazalu.space/2019/09/17/java-memory-error-solution-Theoretically/
