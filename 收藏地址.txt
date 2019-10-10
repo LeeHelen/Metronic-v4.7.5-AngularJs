@@ -907,3 +907,21 @@ private string SerializeToString<T>(T obj)
         return stringWriter.ToString();
     }
 }
+
+
+XML:
+https://docs.microsoft.com/zh-cn/dotnet/csharp/linq/group-query-results
+https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/concepts/linq/querying-an-xdocument-vs-querying-an-xelement
+https://blog.csdn.net/IstarI/article/details/51559052
+https://www.cnblogs.com/libingql/p/4070575.html
+https://www.cnblogs.com/lifepoem/archive/2011/12/12/2285092.html
+https://www.cnblogs.com/mingmingruyuedlut/archive/2011/01/27/1946239.html
+
+
+
+
+
+
+
+
+
