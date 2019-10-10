@@ -870,3 +870,40 @@ http://www.hechaku.com/sqlfunction/SQL_TRIM__hanshu.html
 
 
 https://zazalu.space/2019/09/17/java-memory-error-solution-Theoretically/
+
+
+
+
+
+/// <summary>
+/// 格式化为xml字符串 
+/// </summary>
+/// <typeparam name="T"></typeparam>
+/// <param name="obj"></param>
+/// <returns></returns>
+private string SerializeToString<T>(T obj)
+{
+    // 去掉xml头
+    XmlWriterSettings settings = new XmlWriterSettings()
+    {
+        OmitXmlDeclaration = true,
+        Indent = true,
+        Encoding = Encoding.UTF8,
+        NamespaceHandling = NamespaceHandling.Default
+    };
+    // 定制命名空间
+    XmlSerializerNamespaces namespaces = new XmlSerializerNamespaces();
+    namespaces.Add("", "https://github.com/LeeHelen");
+
+    using (StringWriter stringWriter = new StringWriter())
+    {
+        Type t = obj.GetType();
+        System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(t);
+
+        using (XmlWriter xmlWriter = XmlWriter.Create(stringWriter, settings))
+        {
+            serializer.Serialize(xmlWriter, obj, namespaces);
+        }
+        return stringWriter.ToString();
+    }
+}
