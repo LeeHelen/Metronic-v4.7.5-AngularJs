@@ -919,6 +919,30 @@ https://www.cnblogs.com/mingmingruyuedlut/archive/2011/01/27/1946239.html
 
 
 
+XDocument ssbXDocument = new XDocument(
+                new XElement(XName.Get("Publish", ""),
+                    new XElement("FromService", ""),
+                    new XElement("ToService", ""),
+                    new XElement("RouteTable", 
+                        new XElement("Article", 
+                            new XElement("Article1", ""),
+                            new XElement("ArticleType1", ""),
+                            new XElement("ArticleType2", "")
+                        )
+                    ),
+                    new XElement("Node",
+                        new XElement("MessageHead", 
+                            new XElement("Namespace", ""),
+                            new XElement("Version", ""),
+                            new XElement("Sender", ""),
+                            new XElement("FromSystem", ""),
+                            new XElement("GlobalBusinessType", ""),
+                            new XElement("TransactionCode", "")
+                        )
+                    ),
+                    new XElement("Body")
+                )
+            );
 
 
 
