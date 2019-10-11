@@ -920,29 +920,40 @@ https://www.cnblogs.com/mingmingruyuedlut/archive/2011/01/27/1946239.html
 
 
 XDocument ssbXDocument = new XDocument(
-                new XElement(XName.Get("Publish", ""),
-                    new XElement("FromService", ""),
-                    new XElement("ToService", ""),
-                    new XElement("RouteTable", 
-                        new XElement("Article", 
-                            new XElement("Article1", ""),
-                            new XElement("ArticleType1", ""),
-                            new XElement("ArticleType2", "")
-                        )
-                    ),
-                    new XElement("Node",
-                        new XElement("MessageHead", 
-                            new XElement("Namespace", ""),
-                            new XElement("Version", ""),
-                            new XElement("Sender", ""),
-                            new XElement("FromSystem", ""),
-                            new XElement("GlobalBusinessType", ""),
-                            new XElement("TransactionCode", "")
-                        )
-                    ),
-                    new XElement("Body")
-                )
-            );
+    new XElement("Publish".GetXNameWithNamespace(),
+        new XElement("FromService".GetXNameWithNamespace(), ""),
+        new XElement("ToService".GetXNameWithNamespace(), ""),
+        new XElement("RouteTable".GetXNameWithNamespace(),
+            new XElement("Article".GetXNameWithNamespace(),
+                new XElement("ArticleCategory".GetXNameWithNamespace(), "MarketPlaceMessage"),
+                new XElement("ArticleType1".GetXNameWithNamespace(), "ProgramInfo"),
+                new XElement("ArticleType2".GetXNameWithNamespace(), "1003")
+            )
+        ),
+        new XElement("Node".GetXNameWithNamespace(),
+            new XElement("MessageHead".GetXNameWithNamespace(),
+                new XElement("Namespace".GetXNameWithNamespace(), ""),
+                new XElement("Version".GetXNameWithNamespace(), "1.0"),
+                new XElement("Sender".GetXNameWithNamespace(), ""),
+                new XElement("FromSystem".GetXNameWithNamespace(), ""),
+                new XElement("GlobalBusinessType".GetXNameWithNamespace(), ""),
+                new XElement("TransactionCode".GetXNameWithNamespace(), "")
+            )
+        ),
+        new XElement("Body".GetXNameWithNamespace())
+    )
+);
+var xxxxx = ssbXDocument.ToString();
+
+https://docs.microsoft.com/zh-cn/dotnet/csharp/programming-guide/concepts/linq/how-to-create-a-document-with-namespaces-linq-to-xml
+https://stackoverflow.com/questions/11021931/how-do-i-set-namespace-attributes-on-an-xelement/11024621
+https://stackoverflow.com/questions/4340096/xelement-adds-an-xmlns
+https://tewarid.github.io/2015/09/29/create-xml-documents-in-linq.html
+https://blog.csdn.net/yuxuac/article/details/64905773
+
+
+
+
 
 
 
