@@ -975,3 +975,12 @@ https://www.cnblogs.com/libingql/p/3801704.html
 http://www.ishenping.com/ArtInfo/1238046.html
 http://www.ojit.com/article/234731
 
+
+
+https://www.cnblogs.com/artech/p/inside-asp-net-core-1.html
+https://www.cnblogs.com/artech/archive/2010/01/31/1660433.html
+https://www.cnblogs.com/artech/p/hosting-environment.html
+https://www.cnblogs.com/artech/p/add-headers-for-httpclient.html
+https://www.cnblogs.com/artech/p/dependency-injection-in-asp-net-core.html
+
+
