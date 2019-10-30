@@ -984,3 +984,4 @@ https://www.cnblogs.com/artech/p/add-headers-for-httpclient.html
 https://www.cnblogs.com/artech/p/dependency-injection-in-asp-net-core.html
 
 
+https://my.oschina.net/weisenz/blog/200607
