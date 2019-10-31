@@ -985,3 +985,6 @@ https://www.cnblogs.com/artech/p/dependency-injection-in-asp-net-core.html
 
 
 https://my.oschina.net/weisenz/blog/200607
+
+
+https://www.html.cn/doc/chrome-devtools/manage-data/local-storage/
