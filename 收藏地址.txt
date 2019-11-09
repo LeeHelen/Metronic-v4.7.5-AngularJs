@@ -997,3 +997,9 @@ https://www.scrumguides.org/docs/scrumguide/v2017/2017-Scrum-Guide-Chinese-Tradi
 
 
 https://www.fangzhipeng.com/spring-boot.html
+
+
+Eclipse自定义注释风格
+https://www.jianshu.com/p/98f818f0ef73
+https://my.oschina.net/songxinqiang/blog/1806701
+https://blog.csdn.net/qq_34412985/article/details/79279136
