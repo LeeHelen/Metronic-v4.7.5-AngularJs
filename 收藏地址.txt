@@ -1037,3 +1037,9 @@ https://nsubstitute.github.io/help/getting-started/
         }
 
         //自定义异常：throw new BusinessException($"Value cannot be null.\nParameter name: {nameof(xxxx)},{nameof(yyyy)}");
+
+
+
+http://www.gimoo.net/t/1802/5a7669261cf29.html
+https://my.oschina.net/u/1170450/blog/1631173
+https://www.jianshu.com/p/041bec8ae6d3
