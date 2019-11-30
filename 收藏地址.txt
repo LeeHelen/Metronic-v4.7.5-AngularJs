@@ -1084,3 +1084,45 @@ https://blog.csdn.net/qq_2300688967/article/details/80765004
         return true;
       return flag;
     }
+    
+ 
+
+
+
+/// <summary>
+    /// Auto Convert Json string to object
+    ///  </summary>
+    /// <typeparam name="T">Object Type</typeparam>
+    /// <param name="jsonStr">Json String</param>
+    /// <returns>Json format string</returns>
+    public static T ToObjectExt<T>(this string jsonStr)
+    {
+      JsonSerializerSettings settings = new JsonSerializerSettings()
+      {
+        NullValueHandling = NullValueHandling.Ignore
+      };
+      IsoDateTimeConverter dateTimeConverter = new IsoDateTimeConverter()
+      {
+        DateTimeFormat = "MM\\/dd\\/yyyy HH:mm:ss"
+      };
+      settings.Converters.Add((JsonConverter) dateTimeConverter);
+      return JsonConvert.DeserializeObject<T>(jsonStr, settings);
+    }
+    
+    
+    
+    /// <summary>
+    /// Auto Convert object to Json
+    /// </summary>
+    /// <typeparam name="T">Object Type</typeparam>
+    /// <param name="obj">the given original object</param>
+    /// <param name="jsonSerializerSettings">json setting</param>
+    /// <returns>Json format string</returns>
+    public static string ToJsonExt<T>(this T obj, JsonSerializerSettings jsonSerializerSettings = null) where T : class
+    {
+      if ((object) obj == null)
+        return string.Empty;
+      jsonSerializerSettings = jsonSerializerSettings ?? JsonSerializerSettingConst.DefaultSetting;
+      return JsonConvert.SerializeObject((object) obj, jsonSerializerSettings);
+    }
+    
