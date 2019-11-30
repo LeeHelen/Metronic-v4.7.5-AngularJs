@@ -1051,3 +1051,36 @@ https://www.cnblogs.com/zhoading/p/10760377.html
 
 
 https://blog.csdn.net/qq_2300688967/article/details/80765004
+
+
+
+        #region check null or empty
+
+        public static bool IsNullOrEmpty(this IEnumerable source)
+        {
+            return !source.IsNotNullOrEmpty();
+        }
+
+        public static bool IsNotNullOrEmpty(this IEnumerable source)
+        {
+            return (source?.GetEnumerator()?.MoveNext()).GetValueOrDefault();
+        }
+
+        #endregion check null or empty
+	
+	    /// <summary>判断是否为null，null或0长度都返回true</summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    public static bool IsNullOrEmpty<T>(this T value) where T : class
+    {
+      if ((object) value == null)
+        return true;
+      IEnumerator enumerator = ((object) value as IEnumerable)?.GetEnumerator();
+      if (enumerator == null)
+        return false;
+      bool flag = !enumerator.MoveNext();
+      if (flag)
+        return true;
+      return flag;
+    }
