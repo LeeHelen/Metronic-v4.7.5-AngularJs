@@ -1148,3 +1148,105 @@ https://nsubstitute.github.io/help/actions-with-arguments/
 java：
 https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests
 https://howtodoinjava.com/junit5/expected-exception-example/
+
+
+
+
+
+
+
+
+
+
+public static class ObjectExtension
+    {
+        /// <summary>判断是否为null，null或0长度都返回true，兼容低版本</summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool IsNullOrEmpty<T>(this T value) where T : class
+        {
+            if (value == null)
+                return true;
+
+            IEnumerable enumerable = value as IEnumerable;
+            if (enumerable == null)
+                return false;
+
+            IEnumerator enumerator = enumerable.GetEnumerator();
+
+            return !enumerator.MoveNext();
+        }
+
+        /// <summary>
+        /// 判断是否为null，null或0长度都返回true，NetCore
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static bool IsNullOrEmpty(this IEnumerable source)
+        {
+            return !source.IsNotNullOrEmpty();
+        }
+
+        /// <summary>
+        /// 判断是否为null，null或0长度都返回true，NetCore
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static bool IsNotNullOrEmpty(this IEnumerable source)
+        {
+            return (source?.GetEnumerator()?.MoveNext()).GetValueOrDefault();
+        }
+    }
+
+    public class ObjectExtensionUT
+    {
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        public void IsNullOrEmpty_String_Test(string input)
+        {
+            Assert.True(input.IsNullOrEmpty());
+        }
+
+        [Fact]
+        public void IsNullOrEmpty_Array_Test()
+        {
+            int[] array = null;
+            Assert.True(array.IsNullOrEmpty());
+            array = new int[0];
+            Assert.True(array.IsNullOrEmpty());
+
+            ArrayList arrayList = null;
+            Assert.True(arrayList.IsNullOrEmpty());
+            arrayList = new ArrayList();
+            Assert.True(arrayList.IsNullOrEmpty());
+        }
+
+        [Fact]
+        public void IsNullOrEmpty_List_Test()
+        {
+            List<string> list = null;
+            Assert.True(list.IsNullOrEmpty());
+            list = new List<string>();
+            Assert.True(list.IsNullOrEmpty());
+        }
+
+        [Fact]
+        public void IsNullOrEmpty_Hashtable_Test()
+        {
+            Hashtable hashtable = null;
+            Assert.True(hashtable.IsNullOrEmpty());
+            hashtable = new Hashtable();
+            Assert.True(hashtable.IsNullOrEmpty());
+        }
+
+        [Fact]
+        public void IsNullOrEmpty_Dictionary_Test()
+        {
+            Dictionary<string,string> dic = null;
+            Assert.True(dic.IsNullOrEmpty());
+            dic = new Dictionary<string, string>();
+            Assert.True(dic.IsNullOrEmpty());
+        }
+    }
