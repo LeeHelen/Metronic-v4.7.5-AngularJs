@@ -1252,3 +1252,14 @@ public static class ObjectExtension
     }
     
     
+    
+    
+    blockSellerArray = Arrays
+					.stream(StringUtils.split(blockSellers, ','))
+					.filter(s -> s != null && StringUtils.isNoneBlank(s))
+					.map(String::toUpperCase)
+					.toArray(String[]::new);
+					
+					
+		https://juejin.im/post/5adbf8226fb9a07aac240a67			
+					
