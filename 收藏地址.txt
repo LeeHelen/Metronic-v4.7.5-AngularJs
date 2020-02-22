@@ -1290,3 +1290,4 @@ https://yeasy.gitbooks.io/docker_practice/content/
 
 
 https://docs.microsoft.com/zh-cn/dotnet/core/install/localized-intellisense
+C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.netcore.app\2.2.0\ref\netcoreapp2.2\zh-hans
