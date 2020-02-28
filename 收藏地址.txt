@@ -1317,3 +1317,10 @@ vi=vim $*
 cmderr=cd /d "%CMDER_ROOT%"
 redis-e11=redis-cli -h {IP} -p {PORT} -c
 ..=cd ..
+
+
+
+
+
+https://docs.rancher.cn/os/
+https://www.rancher.cn/rancher-k3s/
