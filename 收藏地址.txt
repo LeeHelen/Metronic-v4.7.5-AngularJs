@@ -1332,3 +1332,29 @@ https://doczhcn.gitbook.io/junit5/index/index-2/parameterized-tests#csvsource
 
 
 https://www.cnblogs.com/1175429393wljblog/p/12035084.html
+
+
+
+
+
+
+https://www.cnblogs.com/woshimrf/p/java-list-distinct.html
+https://juejin.im/post/5cd6b719f265da03b2044d56
+https://codertw.com/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/469602/
+https://www.javazhiyin.com/52193.html
+https://blog.csdn.net/liuj2511981/article/details/82180776
+https://blog.csdn.net/shu_xiaobai/article/details/79559836
+https://windcoder.com/java8delistquzhong
+https://www.cnblogs.com/xuwenjin/p/9660393.html  !!!!!!!
+https://segmentfault.com/a/1190000005738975
+https://segmentfault.com/a/1190000021503678
+https://blog.csdn.net/u013591605/article/details/75267629
+
+
+
+
+
+
+
+
+
