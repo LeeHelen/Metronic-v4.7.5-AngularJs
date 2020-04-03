@@ -1360,3 +1360,9 @@ https://blog.csdn.net/changqing5818/article/details/50008829
 https://www.jianshu.com/p/197552e0655e?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation
 http://www.javacui.com/Theory/417.html
 https://blog.nowcoder.net/n/e72958ad6c044babb8c0bdbd11f55401
+
+
+
+
+
+https://doczhcn.gitbook.io/junit5/index/index-2/parameterized-tests
