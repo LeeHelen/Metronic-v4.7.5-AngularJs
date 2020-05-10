@@ -1376,3 +1376,65 @@ https://juejin.im/post/5adbf8226fb9a07aac240a67
 
 
 https://blog.csdn.net/yangxu19992/article/details/80901987
+
+
+
+
+
+https://blog.csdn.net/ai2000ai/article/details/78282956
+http://c.biancheng.net/view/821.html
+http://c.biancheng.net/view/806.html
+https://www.yuque.com/grasilife/docker/image-dockerfile-env
+https://blog.csdn.net/dataiyangu/article/details/104317155
+
+
+#!/bin/bash
+world="word"
+echo "hello ${world}!" #打印输出语句
+
+read name
+echo "hello ${name}"
+
+#./demo1.sh
+#/bin/bash demo1.sh
+#bash demo1.sh
+
+$$ #获取当前进程的 PID
+
+content=$(cat test.txt) #将命令的结果赋值给变量
+#content=`cat test.txt`
+echo ${content}
+
+readonly readonlyPara #只读变量
+
+unset name #删除变量
+
+###############################################命令替换
+begin_time=`date`
+sleep 1s
+end_time=$(date)
+echo "begin_time:${begin_time}"
+echo "end_time:${end_time}"
+
+begin_time=`date +%s`
+sleep 1s
+end_time=$(date +%s)
+run_time=$((end_time - begin_time)) #(( ))是 Shell 数学计算命令
+echo "run_time:${run_time}"
+
+###############################################函数
+function foo() {
+    return $(($1 + $2)) #$n（n≥1）	传递给脚本或函数的参数
+}
+foo 1 2
+echo $? #上个命令的退出状态，或函数的返回值，
+echo $# #传递给脚本或函数的参数个数。
+echo $* #传递给脚本或函数的所有参数。
+
+###############################################字符串
+
+
+
+
+
+
