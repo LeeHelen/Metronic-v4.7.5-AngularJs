@@ -1439,3 +1439,12 @@ echo $* #传递给脚本或函数的所有参数。
 http://c.biancheng.net/view/2709.html
 
 https://npm.taobao.org/mirrors
+
+
+
+
+
+https://www.cnblogs.com/abcdwxc/archive/2007/10/30/942834.html
+https://www.cnblogs.com/zhili/p/DesignPatternSummery.html
+https://www.cnblogs.com/patrickliu/p/8287784.html
+
