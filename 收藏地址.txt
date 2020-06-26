@@ -1448,3 +1448,9 @@ https://www.cnblogs.com/abcdwxc/archive/2007/10/30/942834.html
 https://www.cnblogs.com/zhili/p/DesignPatternSummery.html
 https://www.cnblogs.com/patrickliu/p/8287784.html
 
+
+
+https://projectlombok.org/setup/eclipse
+https://blog.csdn.net/qq_41633199/article/details/82498507
+-javaagent:lombok.jar
+-Xbootclasspath/a:lombok.jar
