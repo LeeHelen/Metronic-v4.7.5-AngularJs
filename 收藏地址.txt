@@ -1454,3 +1454,17 @@ https://projectlombok.org/setup/eclipse
 https://blog.csdn.net/qq_41633199/article/details/82498507
 -javaagent:lombok.jar
 -Xbootclasspath/a:lombok.jar
+
+
+mybatis：
+https://blog.csdn.net/u011390452/article/details/50986748
+https://www.jianshu.com/p/a418ead9ce32
+https://www.cnblogs.com/yaowen/p/8883965.html
+https://blog.csdn.net/s592652578/article/details/52871884
+https://blog.csdn.net/HaHa_Sir/article/details/79277788
+https://www.cnblogs.com/a8457013/p/8033263.html
+https://blog.csdn.net/qq_23476319/article/details/53783046
+https://www.cnblogs.com/heliusKing/p/11173362.html
+
+
+
