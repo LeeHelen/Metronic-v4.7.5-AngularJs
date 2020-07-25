@@ -1472,3 +1472,21 @@ http://www.codemaid.net/
 
 https://docs.microsoft.com/zh-cn/dotnet/core/tools/dotnet-tool-install
 https://www.cnblogs.com/akwwl/p/3232679.html
+
+
+
+
+BeanFactory：
+https://www.cnblogs.com/forzheng/p/8290519.html
+https://blog.csdn.net/evilcry2012/article/details/78927479
+https://geek-docs.com/spring-boot/spring-boot-tutorials/lazybean.html
+https://geek-docs.com/spring-boot/spring-boot-tutorials/datajpaquery.html
+https://blog.csdn.net/qq_38534144/article/details/82414201
+https://paine1690.github.io/post/67ea0fe9.html
+https://www.cnblogs.com/duanxz/p/3794075.html
+https://juejin.im/post/5dad1455f265da5b6006fa6a
+
+
+
+
+
