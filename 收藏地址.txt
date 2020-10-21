@@ -1291,6 +1291,10 @@ https://yeasy.gitbooks.io/docker_practice/content/
 
 https://docs.microsoft.com/zh-cn/dotnet/core/install/localized-intellisense
 C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.netcore.app\2.2.0\ref\netcoreapp2.2\zh-hans
+复制到：%ProgramFiles%\dotnet\packs\Microsoft.NETCore.App.Ref\3.1.0\ref\netcoreapp3.1
+复制到：%ProgramFiles%\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\3.1.0\ref\netcoreapp3.1
+复制到：%ProgramFiles%\dotnet\packs\NETStandard.Library.Ref\3.1.0\ref\netcoreapp3.1
+
 
 
 
