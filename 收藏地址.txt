@@ -1495,7 +1495,7 @@ https://juejin.im/post/5dad1455f265da5b6006fa6a
 
 
 https://docs.microsoft.com/zh-cn/sql/connect/ado-net/microsoft-ado-net-sql-server?view=sql-server-ver15
-
+https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/localization?view=aspnetcore-3.1
 
 
 
